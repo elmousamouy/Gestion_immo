@@ -1,5 +1,5 @@
 
-@extends('Layouts.main')
+@extends('layouts.main')
 
 <style>
     th {

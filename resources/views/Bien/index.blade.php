@@ -1,4 +1,4 @@
-@extends('Layouts.main')
+@extends('layouts.main')
 <style>
   th {
       font-size: 11px;

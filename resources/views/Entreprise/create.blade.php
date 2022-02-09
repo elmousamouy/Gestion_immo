@@ -1,4 +1,4 @@
-@extends('Layouts.main')
+@extends('layouts.main')
 
 @section('content')
 <div class="card" style="background-color: rgb(255, 255, 255)">

@@ -1,6 +1,6 @@
 
 
-@extends('Layouts.main')
+@extends('layouts.main')
 
 @section('content')
 @if ($message = Session::get('error'))

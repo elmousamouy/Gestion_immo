@@ -1,5 +1,5 @@
 
-@extends('Layouts.main')
+@extends('layouts.main')
 @section('content')
 <div class="form-row "  style="margin-top:20%; margin:30px; ">
 
