@@ -1,57 +1,38 @@
 
 @extends('layouts.main')
 @section('content')
-<div class="form-row "  style="margin-top:20%; margin:30px; ">
-
-<div class="card" style="width: 18rem ; margin:0px !important">
-    <img class="card-img-top"  style="width: 100px" src="{{ asset('img/LOGO-EV_FR.png') }}" alt="Card image cap">
+<div class="form-row "  style="margin:150px; ">
+<div class="card" style="width: 10rem ; margin:20px !important"><a href="{{route('bien.filiale',['entreprise_id'=>1])}}"><img class="card-img-top"  height="150px" style="width: 10rem20px" src="{{ asset('img/LOGO-EV_FR.png') }}">
     <div class="card-body">
       <h5 class="card-title">EV Maroc</h5>
-      <p class="card-text"></p>
-      <a href="{{route('bien.filiale',['entreprise_id'=>1])}}" class="btn btn-primary">Aller quelque part</a>
-    </div>
+    </div></a>
   </div>
-  <div class="card" style="width: 18rem; margin-left:10px;">
-    <img class="card-img-top"  style="width: 100px" src="{{ asset('img/LOGO-EV_FR.png') }}" alt="Card image cap"> 
+  <div class="card" style="width: 10rem ; margin:20px !important"><a href="{{route('bien.filiale',['entreprise_id'=>2])}}"><img class="card-img-top"  height="150px" style="width: 10rem20px" src="{{ asset('img/ameo.png') }}">
     <div class="card-body">
       <h5 class="card-title">AMEO</h5>
-      <p class="card-text"></p>
-      <a href="{{route('bien.filiale',['entreprise_id'=>2])}}" class="btn btn-primary">Aller quelque part</a>
-    </div>
+    </div></a>
   </div>
-  <div class="card" style="width: 18rem;  margin-left:10px;">
-    <img class="card-img-top"    style="width: 100px" src="{{ asset('img/LOGO-EV_FR.png') }}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title"> Bics</h5>
-      <p class="card-text"></p>
-      <a href="{{route('bien.filiale',['entreprise_id'=>3])}}" class="btn btn-primary">Aller quelque part</a>
-    </div>
-  </div>
-  <div class="card" style="width: 18rem;  margin-left:10px;">
-    <img class="card-img-top"  style="width: 100px" src="{{ asset('img/LOGO-EV_FR.png') }}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">CDP</h5>
-      <p class="card-text"></p>
-      <a href="{{route('bien.filiale',['entreprise_id'=>4])}}" class="btn btn-primary">Aller quelque part</a>
-    </div>
-  </div>
-  <div class="card" style="width: 18rem;  margin-left:10px;">
-    <img class="card-img-top"  style="width: 100px" src="{{ asset('img/LOGO-EV_FR.png') }}" alt="Card image cap">
+  <div class="card" style="width: 10rem ; margin:20px !important"><a href="{{route('bien.filiale',['entreprise_id'=>5])}}"><img class="card-img-top" height="150px" style="width: 10rem20px" src="{{ asset('img/LOGO-EV_FR.png') }}">
     <div class="card-body">
       <h5 class="card-title">GB</h5>
-      <p class="card-text"></p>
-      <a href="{{route('bien.filiale',['entreprise_id'=>5])}}" class="btn btn-primary">Aller quelque part</a>
-    </div>
+    </div></a>
   </div>
-  <div class="card" style="width: 18rem;  margin-left:10px;">
-    <img class="card-img-top"   style="width: 100px" src="{{ asset('img/LOGO-EV_FR.png') }}" alt="Card image cap">
+
+  <div class="card" style="width: 10rem ; margin:20px !important"><a href="{{route('bien.filiale',['entreprise_id'=>3])}}"><img class="card-img-top" height="150px" style="width: 10rem20px" src="{{ asset('img/bics.png') }}">
+    <div class="card-body">
+      <h5 class="card-title">BICS</h5>
+    </div></a>
+  </div>
+
+  <div class="card" style="width: 10rem ; margin:20px !important"><a href="{{route('bien.filiale',['entreprise_id'=>4])}}"><img class="card-img-top"  height="150px" style="width: 10rem20px" src="{{ asset('img/LOGO-EV_FR.png') }}">
+    <div class="card-body">
+      <h5 class="card-title">CDP</h5>
+    </div></a>
+  </div>
+  <div class="card" style="width: 10rem ; margin: 20px 0 20px 20px   !important"><a href="{{route('bien.filiale',['entreprise_id'=>6])}}"><img class="card-img-top"   height="150px" style="width: 10rem20px" src="{{ asset('img/LacqLogo.jpg') }}">
     <div class="card-body">
       <h5 class="card-title">LACQ</h5>
-      <p class="card-text"></p>
-      <a href="{{route('bien.filiale',['entreprise_id'=>6])}}" class="btn btn-primary">Aller quelque part</a>
-    </div>
+    </div></a>
   </div>
-</div>
-</div>
 </div>
   @endsection
