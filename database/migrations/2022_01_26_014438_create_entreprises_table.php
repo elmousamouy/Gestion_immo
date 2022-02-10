@@ -19,6 +19,50 @@ class CreateEntreprisesTable extends Migration
             $table->string('descriprtion')->nullable();
             $table->timestamps();
         });
+
+        DB::table('entreprises')->insert(
+            array(
+                array(
+                    'id' => 1,
+                    'nom_entreprises'=>"EV Maroc",
+                    'descriprtion' => "-",
+                    
+                    
+                ),
+                array(
+                    'id' => 2,
+                    'nom_entreprises'=>"AMEO",
+                    'descriprtion' => "-",
+                   
+                ),
+                array(
+                    'id' => 3,
+                    'nom_entreprises'=>"CDP",
+                    'descriprtion' => "- ",
+                    
+                ),
+                array(
+                    'id' => 4,
+                    'nom_entreprises'=>"CDP",
+                    'descriprtion' => "- ",
+                    
+                ),
+                array(
+                    'id' => 5,
+                    'nom_entreprises'=>"GRERN BIZ",
+                    'descriprtion' => " - ",
+                    
+                ),
+                array(
+                    'id' => 6,
+                    'nom_entreprises'=>"LACQ",
+                    'descriprtion' => " - ",
+                    
+                ),
+                
+          
+            )
+        );
     }
 
     /**

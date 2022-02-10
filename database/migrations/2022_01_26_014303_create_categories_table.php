@@ -19,6 +19,32 @@ class CreateCategoriesTable extends Migration
             $table->string('descriprtion')->nullable();
             $table->timestamps();
         });
+        DB::table('categories')->insert(
+            array(
+                array(
+                    'id' => 1,
+                    'nom_cat'=>"immobilisation informatique",
+                    'descriprtion' => "-",
+                    
+                    
+                ),
+                array(
+                    'id' => 2,
+                    'nom_cat'=>"immobilisation labo",
+                    'descriprtion' => "-",
+                   
+                ),
+                array(
+                    'id' => 3,
+                    'nom_cat'=>"immobilisation industrielle",
+                    'descriprtion' => "- ",
+                    
+                ),
+
+                
+          
+            )
+        );
     }
 
     /**
