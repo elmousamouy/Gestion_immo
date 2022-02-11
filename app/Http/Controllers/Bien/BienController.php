@@ -12,7 +12,6 @@ use App\Imports\BienImport;
 use Illuminate\Support\Facades\DB;
 
 
-
 class BienController extends Controller
 {
     /**
@@ -37,6 +36,7 @@ class BienController extends Controller
     } 
 
     public function showfiliale($entreprise_id)
+          
 
     {
         $entreprises  = Entreprise::get();
@@ -49,9 +49,6 @@ class BienController extends Controller
         return view('Bien.index', compact('biens', 'entreprises','categories'));
         
     } 
-
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -97,7 +94,6 @@ class BienController extends Controller
             'n_serie' => 'required',
             'n_bc' => 'required',
             'code_barre' => 'required',
-
         ]);
 
         if ($request->hasFile('factur')) {
@@ -244,12 +240,12 @@ class BienController extends Controller
          $recherche = trim($request->input('vna'));
 
          $biens = Bien::select("*")
-         ->Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-         ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-        ->where("(('prix_achat')-((100/('duree_ammortissement')*('prix_achat'))*('duree_ammortissement'))/100)", '=',$recherche)
-        ->paginate(20);
-        $table = view('Bien.table', compact('biens'))->render();
-        return response()->json(compact('table'));
+            ->Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
+            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
+            ->where("(('prix_achat')-((100/('duree_ammortissement')*('prix_achat'))*('duree_ammortissement'))/100)", '=',$recherche)
+            ->paginate(20);
+            $table = view('Bien.table', compact('biens'))->render();
+            return response()->json(compact('table'));
 
     }
     public function rechercheaffictation(Request $request){
@@ -266,6 +262,7 @@ class BienController extends Controller
  
     public function rechercheparentreprise(Request $request){
 
+        
         $entreprise = trim($request->input('entreprise'));
         $categorie = trim($request->input('categorie'));
         if(!empty($entreprise)  and empty($categorie)){
@@ -295,21 +292,18 @@ class BienController extends Controller
             $table = view('Bien.table', compact('biens'))->render();
             return response()->json(compact('table'));
         }
-        
-       
-
     }
     public function fileImport(Request $request) 
     {
        
-        try {
+      //  try {
 
            Excel::import(new BienImport, $request->file('biens')->store('temp'));
            return redirect()->route('bien.index')->with("success","Implimantation reussite");
           
-          } catch (\Exception $e) {
+         // } catch (\Exception $e) {
           
             return redirect()->route('bien.index')->with("error","Opiration non aboutie");
-          }
+         // }
     }
 }

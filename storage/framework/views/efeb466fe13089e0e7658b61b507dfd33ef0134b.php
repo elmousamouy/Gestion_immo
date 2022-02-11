@@ -1,4 +1,3 @@
-@extends('layouts.main')
 <style>
   th {
       font-size: 11px;
@@ -21,30 +20,31 @@
     top: 0;
   }
 </style>
-@section('content')
-@if ($message = Session::get('success'))
+<?php $__env->startSection('content'); ?>
+<?php if($message = Session::get('success')): ?>
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>{{ $message }}</strong>
+    <strong><?php echo e($message); ?></strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-@endif
-@if ($message = Session::get('error'))
+<?php endif; ?>
+<?php if($message = Session::get('error')): ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>{{ $message }}</strong>
+    <strong><?php echo e($message); ?></strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-@endif
+<?php endif; ?>
 <div class="card" style="background-color: rgb(255, 255, 255)">
-  <div class="card-header">{{ __('La liste des Biens') }}
-          <a class="btn btn-success btn-sm float-right" href="{{url('/Bien/create')}}">Ajouter un Bien</a>
-          <a class="btn btn-primary btn-sm float-right px-2 mr-2" style="padding: 8px 0px; " href="{{url('/Biens/export')}}" ><i class="fa fa-download" aria-hidden="true"></i></a>
+  <div class="card-header"><?php echo e(__('La liste des Biens')); ?>
+
+          <a class="btn btn-success btn-sm float-right" href="<?php echo e(url('/Bien/create')); ?>">Ajouter un Bien</a>
+          <a class="btn btn-primary btn-sm float-right px-2 mr-2" style="padding: 8px 0px; " href="<?php echo e(url('/Biens/export')); ?>" ><i class="fa fa-download" aria-hidden="true"></i></a>
         
-          <form action="{{url('/Biens/import')}}" method="POST" enctype="multipart/form-data" class="d-inline form-upload float-right">
-            @csrf
+          <form action="<?php echo e(url('/Biens/import')); ?>" method="POST" enctype="multipart/form-data" class="d-inline form-upload float-right">
+            <?php echo csrf_field(); ?>
             <div class="d-inline div-upload">
               <i class="fa fa-upload btn btn-success btn-sm px-2 mr-2" style="padding: 7px 0px; " aria-hidden="true"></i>
               <input type="file" class="input-upload" placeholder="factur" name="biens" >
@@ -58,15 +58,15 @@
 
           <select name="categorie" id="categorie"  class="ml-3 d-inline  form-control form-control-sm col-2 searchSelect" >
             <option  value="" selected>PAR CATEGORIE...</option>
-            @foreach ($categories as $categorie)
-            <option value="{{ $categorie->id }}">{{ $categorie->nom_cat }}</option>
-            @endforeach
+            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <option value="<?php echo e($categorie->id); ?>"><?php echo e($categorie->nom_cat); ?></option>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           </select>
           <select name="" id="entreprise" class="ml-3 d-inline  form-control form-control-sm col-2 searchSelect">
             <option value="" selected>PAR ENTREPRISE...</option>
-            @foreach ($entreprises as $entreprise)
-            <option value="{{ $entreprise->id }}">{{ $entreprise->nom_entreprises }}</option>
-            @endforeach
+            <?php $__currentLoopData = $entreprises; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $entreprise): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <option value="<?php echo e($entreprise->id); ?>"><?php echo e($entreprise->nom_entreprises); ?></option>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           </select>
           <!--
           <select name="" id="vna" class="ml-3 d-inline  form-control form-control-sm col-2 ">
@@ -84,7 +84,7 @@
     </div>
   <div class="card-body">
     <div class="table-container">
-      @include('Bien.table')
+      <?php echo $__env->make('Bien.table', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
   </div>
 </div>
@@ -105,10 +105,10 @@
 
         $.ajax({
 
-          url:'{{ url("/Bien/search") }}',
+          url:'<?php echo e(url("/Bien/search")); ?>',
           method : 'post',
           data:{
-            "_token" : "{{ csrf_token() }}",
+            "_token" : "<?php echo e(csrf_token()); ?>",
             "recherche" : $(this).val(),
           },
           success:function(data){
@@ -131,10 +131,10 @@
 
         $.ajax({
 
-          url:'{{ url("/Bien/search/entreprise/") }}',
+          url:'<?php echo e(url("/Bien/search/entreprise/")); ?>',
           method : 'post',
           data:{
-            "_token" : "{{ csrf_token() }}",
+            "_token" : "<?php echo e(csrf_token()); ?>",
             "entreprise" : entreprise,
             "categorie" : categorie,
           },
@@ -157,10 +157,10 @@
 
         $.ajax({
 
-          url:'{{ url("/Bien/search/vna") }}',
+          url:'<?php echo e(url("/Bien/search/vna")); ?>',
           method : 'post',
           data:{
-            "_token" : "{{ csrf_token() }}",
+            "_token" : "<?php echo e(csrf_token()); ?>",
             "vna" : vna,
             
           },
@@ -180,10 +180,10 @@
     
         if(affictation!=''){
         $.ajax({
-        url:'{{ url("/Bien/search/affictation") }}',
+        url:'<?php echo e(url("/Bien/search/affictation")); ?>',
         method : 'post',
         data:{
-        "_token" : "{{ csrf_token() }}",
+        "_token" : "<?php echo e(csrf_token()); ?>",
         "affictation" : affictation,
         },
         success:function(data){
@@ -202,4 +202,5 @@
 </script>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/Gestion_immo/resources/views/Bien/index.blade.php ENDPATH**/ ?>
