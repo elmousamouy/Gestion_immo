@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '2c7bb47fe799c8994b15f2695bf0a92e91127039',
+        'reference' => 'c61ab5267a39cecfdaeeb6c407172fdd1750c1f8',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -409,7 +409,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '2c7bb47fe799c8994b15f2695bf0a92e91127039',
+            'reference' => 'c61ab5267a39cecfdaeeb6c407172fdd1750c1f8',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -972,12 +972,12 @@
             'dev_requirement' => true,
         ),
         'sebastian/global-state' => array(
-            'pretty_version' => '5.0.3',
-            'version' => '5.0.3.0',
+            'pretty_version' => '5.0.4',
+            'version' => '5.0.4.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sebastian/global-state',
             'aliases' => array(),
-            'reference' => '23bd5951f7ff26f12d4e3242864df3e08dec4e49',
+            'reference' => '19c519631c5a511b7ed0ad64a6713fdb3fd25fe4',
             'dev_requirement' => true,
         ),
         'sebastian/lines-of-code' => array(
