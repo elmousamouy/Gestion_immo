@@ -38,25 +38,25 @@ class CreateEntreprisesTable extends Migration
                 array(
                     'id' => 3,
                     'nom_entreprises'=>"CDP",
-                    'descriprtion' => "- ",
+                    'descriprtion' => "-",
                     
                 ),
                 array(
                     'id' => 4,
-                    'nom_entreprises'=>"CDP",
-                    'descriprtion' => "- ",
+                    'nom_entreprises'=>"BICS",
+                    'descriprtion' => "-",
                     
                 ),
                 array(
                     'id' => 5,
                     'nom_entreprises'=>"GRERN BIZ",
-                    'descriprtion' => " - ",
+                    'descriprtion' => " -",
                     
                 ),
                 array(
                     'id' => 6,
                     'nom_entreprises'=>"LACQ",
-                    'descriprtion' => " - ",
+                    'descriprtion' => " -",
                     
                 ),
                 
