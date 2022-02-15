@@ -262,7 +262,6 @@ class BienController extends Controller
  
     public function rechercheparentreprise(Request $request){
 
-        
         $entreprise = trim($request->input('entreprise'));
         $categorie = trim($request->input('categorie'));
         if(!empty($entreprise)  and empty($categorie)){
@@ -292,18 +291,22 @@ class BienController extends Controller
             $table = view('Bien.table', compact('biens'))->render();
             return response()->json(compact('table'));
         }
+        
+       
+
     }
     public function fileImport(Request $request) 
     {
        
-      //  try {
+        try {
 
            Excel::import(new BienImport, $request->file('biens')->store('temp'));
            return redirect()->route('bien.index')->with("success","Implimantation reussite");
           
-         // } catch (\Exception $e) {
+          } catch (\Exception $e) {
           
             return redirect()->route('bien.index')->with("error","Opiration non aboutie");
          // }
     }
+}
 }

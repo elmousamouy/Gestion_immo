@@ -17,27 +17,27 @@ class CreateBiensTable extends Migration
             $table->id();
             $table->unsignedBigInteger('entreprise_id')->unsigned();
             $table->unsignedBigInteger('categorie_id')->unsigned();
-            $table->string('referance')->nullable();
-            $table->integer('duree_ammortissement')->nullable();
-            $table->date('date_mise_enservice')->nullable();
-            $table->float('prix_achat')->nullable();
-            $table->string('factur')->nullable();
-            $table->string('site')->nullable();
-            $table->string('sous_site')->nullable();
-            $table->string('emplacement')->nullable();
-            $table->string('code_barre')->nullable();
-            $table->string('designation')->nullable();
-            $table->date('date_achat')->nullable();
-            $table->string('fournisseur')->nullable();
-            $table->string('n_serie')->nullable();
-            $table->string('n_factur')->nullable();
-            $table->float('quantitee')->nullable();
-            $table->string('code_comptable')->nullable();
-            $table->string('compte_comptable')->nullable();
-            $table->string('n_bc')->nullable();
-            $table->string('sous_famille')->nullable();
-            $table->integer('affictation')->nullable();
-            $table->string('description_famille')->nullable();
+            $table->string('referance');
+            $table->integer('duree_ammortissement');
+            $table->date('date_mise_enservice');
+            $table->float('prix_achat');
+            $table->string('factur');
+            $table->string('site');
+            $table->string('sous_site');
+            $table->string('emplacement');
+            $table->string('code_barre');
+            $table->string('designation');
+            $table->date('date_achat');
+            $table->string('fournisseur');
+            $table->string('n_serie');
+            $table->string('n_factur');
+            $table->float('quantitee');
+            $table->string('code_comptable');
+            $table->string('compte_comptable');
+            $table->string('n_bc');
+            $table->string('sous_famille');
+            $table->integer('affictation');
+            $table->string('description_famille');
             $table->foreign('entreprise_id')
             ->references('id')
             ->on('entreprises')
