@@ -40,10 +40,10 @@
 @endif
 <div class="card" style="background-color: rgb(255, 255, 255)">
   <div class="card-header">{{ __('La liste des Biens') }}
-          <a class="btn btn-success btn-sm float-right" href="{{url('/Bien/create')}}">Ajouter un Bien</a>
+          <a class="btn btn-success btn-sm float-right" style="font-weight: bold !important ;" href="{{url('/Bien/create')}}">Ajouter un Bien</a>
           <a class="btn btn-primary btn-sm float-right px-2 mr-2" style="padding: 8px 0px; " href="{{url('/Biens/export')}}" ><i class="fa fa-download" aria-hidden="true"></i></a>
         
-          <form action="{{url('/Biens/import')}}" method="POST" enctype="multipart/form-data" class="d-inline form-upload float-right">
+          <form action="{{url('/Biens/import')}}" method="POST"  style="font-weight: bold !important ;" enctype="multipart/form-data" class="d-inline form-upload float-right">
             @csrf
             <div class="d-inline div-upload">
               <i class="fa fa-upload btn btn-success btn-sm px-2 mr-2" style="padding: 7px 0px; " aria-hidden="true"></i>
@@ -52,34 +52,34 @@
           </form>
           
 
-          <input type="text" name="user_name" id="recherche" class="ml-3 d-inline  form-control form-control-sm col-1" >
+          <input type="text" name="user_name" id="recherche" class="ml-3 d-inline  form-control form-control-sm col-1"  style="font-weight: bold !important ;" >
           
            
 
-          <select name="categorie" id="categorie"  class="ml-3 d-inline  form-control form-control-sm col-2 searchSelect" >
+          <select  style="font-weight: bold !important ;" id="categorie"  class="ml-3 d-inline  form-control form-control-sm col-2 searchSelect" >
             <option  value="" selected>PAR CATEGORIE...</option>
             @foreach ($categories as $categorie)
             <option value="{{ $categorie->id }}">{{ $categorie->nom_cat }}</option>
             @endforeach
-          </select>
+          </select><!--
           <select name="" id="entreprise" class="ml-3 d-inline  form-control form-control-sm col-2 searchSelect">
             <option value="" selected>PAR ENTREPRISE...</option>
             @foreach ($entreprises as $entreprise)
             <option value="{{ $entreprise->id }}">{{ $entreprise->nom_entreprises }}</option>
             @endforeach
           </select>
-          <!--
+          
           <select name="" id="vna" class="ml-3 d-inline  form-control form-control-sm col-2 ">
             <option  value="" selected>PAR VNA...</option>
             <option value="0">VNA</option>
             <option value="2">AUTRE</option>
-          </select>
-        -->
+          </select>-->
+        
           
-            <select class="ml-3 d-inline  form-control form-control-sm col-1 " id="affictation" name="">
-              <option selected>PAR AFFICTAION...</option>
-              <option  value="1">AFFICTER</option>
-              <option value="0" >NON AFFICTER</option>
+            <select  style="font-weight: bold !important ;" class="ml-3 d-inline  form-control form-control-sm col-2 " id="affictation" name="affictaion">
+              <option selected>PAR AFFECTAION...</option>
+              <option  value="1">AFFECTER</option>
+              <option value="0" >NON AFFECTER</option>
             </select>        
     </div>
   <div class="card-body">
@@ -110,6 +110,10 @@
           data:{
             "_token" : "{{ csrf_token() }}",
             "recherche" : $(this).val(),
+            "filiale" : {{$entreprise_id ?? 0}},
+            "categorie_id" : $("#categorie").val(),
+            "affictation" : $("#affictation").val()
+
           },
           success:function(data){
             $('.table-container').html(data.table);
@@ -126,6 +130,8 @@
       entreprise = $("#entreprise").val();
       categorie = $("#categorie").val();
       
+    
+      
 
       if(entreprise!='' || categorie!=''){
 
@@ -135,8 +141,9 @@
           method : 'post',
           data:{
             "_token" : "{{ csrf_token() }}",
-            "entreprise" : entreprise,
+      
             "categorie" : categorie,
+            "filiale" : {{$entreprise_id ?? 0}}
           },
           success:function(data){
             $('.table-container').html(data.table);

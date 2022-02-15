@@ -3,34 +3,34 @@
   <table class="table table-striped table-sm ">
       <thead class="thead-light">
         <tr>
-          <th  class="text-right text-nowrap pr-4">#</th>
-          <th  class="text-right text-nowrap pr-4">Entreprise</th>
-          <th  class="text-right text-nowrap pr-4">Categorie</th>
-          <th  class="text-right text-nowrap pr-4">Dure ammortissement</th>
-          <th  class="text-right text-nowrap pr-4">Date de mise en service</th>
-          <th  class="text-right text-nowrap pr-4">Description de famille</th>
-          <th  class="text-right text-nowrap pr-4">Prix</th>
-          <th  class="text-right text-nowrap pr-4"> Date d'ammortissement</th>
-          <th  class="text-right text-nowrap pr-4">File</th>
-          <th  class="text-right text-nowrap pr-4">Referance</th>
-          <th  class="text-right text-nowrap pr-4">Site</th>
-          <th  class="text-right text-nowrap pr-4">Sous-site</th>
-          <th  class="text-right text-nowrap pr-4">Quantitee</th>
-          <th  class="text-right text-nowrap pr-4">Compte comptable</th>
-          <th  class="text-right text-nowrap pr-4">Code comptable</th>
-          <th  class="text-right text-nowrap pr-4">Emplacemnt</th>
-          <th  class="text-right text-nowrap pr-4">N° facture</th>
-          <th  class="text-right text-nowrap pr-4">Code barre</th>
-          <th  class="text-right text-nowrap pr-4">N° bc</th>
-          <th  class="text-right text-nowrap pr-4"> Designation</th>
-          <th  class="text-right text-nowrap pr-4">Date d'achat</th>
-          <th  class="text-right text-nowrap pr-4"> N° serie </th>
-          <th  class="text-right text-nowrap pr-4">Fournisseur</th>
-          <th  class="text-right text-nowrap pr-4">TAUX D'AMMORTISSEMENT</th>
-          <th  class="text-right text-nowrap pr-4">AMMORTISSEMENT</th>
-          <th  class="text-right text-nowrap pr-4"> CUMUL AMMORTISSEMENT</th>
-          <th  class="text-right text-nowrap pr-4"> VNA</th>
-          <th  class="text-right text-nowrap pr-4">Action</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">#</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Entreprise</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Categorie</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Dure ammortissement</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Date de mise en service</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Description de famille</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Prix</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;"> Date d'ammortissement</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">File</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Referance</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Site</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Sous-site</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Quantitee</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Compte comptable</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Code comptable</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Emplacemnt</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">N° facture</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Code barre</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">N° bc</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;"> Designation</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Date d'achat</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;"> N° serie </th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Fournisseur</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">TAUX D'AMMORTISSEMENT</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">AMMORTISSEMENT</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;"> CUMUL AMMORTISSEMENT</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;"> VNA</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Action</th>
 
         
         </tr>
@@ -38,55 +38,55 @@
       <tbody id="class">
         @foreach ($biens as $bien)
         <tr>
-          <td>{{$bien->id}}</td>
-            <td>{{$bien->nom_entreprises}}</td>
-            <td>{{$bien->nom_cat}}</td>
-            <td>{{($bien->duree_ammortissement)}}</td>
-            <td>{{$bien->date_mise_enservice}}</td>
-            <td>{{$bien->description_famille}}</td>
-            <td>{{$bien->prix_achat}}</td>
-            <td>{{date('Y-m-d',strtotime($bien->duree_ammortissement."year", strtotime($bien->date_mise_enservice)))}}</td>
-            <td><a href="{{url($bien->factur)}}">PDF</a></td>
-            <td>{{$bien->referance}}</td>
-            <td>{{$bien->site}}</td>
-            <td>{{($bien->sous_site)}}</td>
-            <td>{{$bien->quantitee}}</td>
-            <td>{{$bien->compte_comptable}}</td>
-            <td>{{$bien->code_comptable}}</td>
-            <td>{{$bien->emplacement}}</td>
-            <td>{{$bien->n_factur}}</td>
-            <td>{{($bien->code_barre)}}</td>
-            <td>{{$bien->n_bc}}</td>
-            <td>{{$bien->designation}}</td>
-            <td>{{$bien->date_achat}}</td>
-            <td>{{$bien->n_serie}}</td>
-            <td>{{$bien->fournisseur}}</td>
+          <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->id}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->nom_entreprises}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->nom_cat}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{($bien->duree_ammortissement)}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->date_mise_enservice}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->description_famille}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->prix_achat}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{date('Y-m-d',strtotime($bien->duree_ammortissement."year", strtotime($bien->date_mise_enservice)))}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;"><a href="{{url($bien->factur)}}">PDF</a></td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->referance}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->site}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{($bien->sous_site)}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->quantitee}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->compte_comptable}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->code_comptable}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->emplacement}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->n_factur}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{($bien->code_barre)}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->n_bc}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->designation}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->date_achat}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->n_serie}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->fournisseur}}</td>
 
             @if($bien->duree_ammortissement>0)
-            <td>{{100/($bien->duree_ammortissement)}}</td> 
-            @else <td>0</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{100/($bien->duree_ammortissement)}}</td> 
+            @else <td class="text-right text-nowrap pr-4font-weight: bold;">0</td>
             @endif
 
             @if($bien->duree_ammortissement>0)
-            <td>{{((100/($bien->duree_ammortissement))*($bien->prix_achat))}}</td>
-            @else <td>0</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{((100/($bien->duree_ammortissement))*($bien->prix_achat))}}</td>
+            @else <td class="text-right text-nowrap pr-4font-weight: bold;">0</td>
             @endif
 
          
 
             @if($bien->duree_ammortissement>0)
-            <td>{{((100/($bien->duree_ammortissement)*($bien->prix_achat))*($bien->duree_ammortissement))/100}}</td>
-            @else <td>0</td> 
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{((100/($bien->duree_ammortissement)*($bien->prix_achat))*($bien->duree_ammortissement))/100}}</td>
+            @else <td class="text-right text-nowrap pr-4font-weight: bold;">0</td> 
             @endif
             
             @if($bien->duree_ammortissement>0)
-            <td>{{($bien->prix_achat)-((100/($bien->duree_ammortissement)*($bien->prix_achat))*($bien->duree_ammortissement))/100}}</td>
-            @else <td>0</td> 
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{($bien->prix_achat)-((100/($bien->duree_ammortissement)*($bien->prix_achat))*($bien->duree_ammortissement))/100}}</td>
+            @else <td class="text-right text-nowrap pr-4font-weight: bold;">0</td> 
             @endif
 
             
-            <td class="text-right text-nowrap"><a href="{{route('bien.edit',['id'=>$bien->id])}}" class="btn btn-primary btn-sm btnAction"><i class="fa fa-edit"></i></a>
-            <a href="{{route('bien.destroy',['id'=>$bien->id])}}" class="btn btn-danger btn-sm btnAction"> <i class="fa fa-trash" aria-hidden="true"></a></td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;" class="text-right text-nowrap"><a href="{{route('bien.edit',['id'=>$bien->id])}}" class="btn btn-primary btn-sm btnAction"><i class="fa fa-edit"></i></a>
+            <a href="{{route('bien.destroy',['id'=>$bien->id])}}" data-toggle="confirmation" class="btn btn-danger btn-sm btnAction"> <i class="fa fa-trash" aria-hidden="true"></a></td>
           </tr>
           @endforeach
           
@@ -94,7 +94,9 @@
       </tbody>
     </table>
 </div>
-
-  <div class="d-flex justify-content-center mt-2">
+@if ($biens instanceof \Illuminate\Pagination\LengthAwarePaginator)
+<div class="d-flex justify-content-center mt-2">
     {!! $biens->links('pagination::bootstrap-4') !!}
-  </div>
+</div>
+@endif
+

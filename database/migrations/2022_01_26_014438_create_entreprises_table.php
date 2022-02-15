@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateEntreprisesTable extends Migration
 {
@@ -24,7 +25,7 @@ class CreateEntreprisesTable extends Migration
             array(
                 array(
                     'id' => 1,
-                    'nom_entreprises'=>"EV Maroc",
+                    'nom_entreprises'=>"EVM",
                     'descriprtion' => "-",
                     
                     
@@ -49,7 +50,7 @@ class CreateEntreprisesTable extends Migration
                 ),
                 array(
                     'id' => 5,
-                    'nom_entreprises'=>"GRERN BIZ",
+                    'nom_entreprises'=>"GB",
                     'descriprtion' => " -",
                     
                 ),

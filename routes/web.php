@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/Biens/edit/{id}', [BienController::class ,'edit'])->name('bien.edit');
         Route::post('/Biens/update/{id}', [BienController::class ,'update'])->name('bien.update');
         Route::get('/Biens/delete/{id}', [BienController::class ,'destroy'])->name('bien.destroy');
+        Route::delete('delete-multiple-category', [BienController::class, 'deleteMultiple']);
+
         Route::get('/Biens/export', [BienController::class, 'export']);
         Route::post('/Biens/import', [BienController::class, 'fileImport']);
 

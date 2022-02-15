@@ -46,7 +46,7 @@ class BienController extends Controller
             ->select('biens.*', 'nom_entreprises', 'nom_cat')
             ->where('entreprise_id', '=',$entreprise_id)
             ->paginate(20);
-        return view('Bien.index', compact('biens', 'entreprises','categories'));
+        return view('Bien.index', compact('biens', 'entreprises','categories','entreprise_id'));
         
     } 
 
@@ -203,7 +203,6 @@ class BienController extends Controller
         $biens->update();
         return redirect()->route('bien.index')->with("success","Bien bien Modifier");
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -225,17 +224,62 @@ class BienController extends Controller
     public function recherche(Request $request){
 
         $recherche = trim($request->input('recherche'));
+        $entreprise_id = trim($request->input('filiale'));
+        $categorie_id = trim($request->input('categorie_id'));
+        $affictation = trim($request->input('affictation'));
 
-        $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-        ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-        ->where('code_barre', 'like', "%{$recherche}%")
+        if($entreprise_id != 0 && !empty($categorie_id)) {
+             $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
+            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
+            ->where(function ($query) use ($recherche) {
+                $query->where('code_barre', 'like', "%{$recherche}%")
+                    ->orwhere('description_famille', 'like', "%{$recherche}%")
+                    ->orwhere('n_serie', 'like', "%{$recherche}%")
+                    ->orwhere('fournisseur', 'like', "%{$recherche}%")
+                    ->orwhere('compte_comptable', 'like', "%{$recherche}%")
+                    ->orwhere('code_comptable', 'like', "%{$recherche}%")
+                    ->orwhere('designation', 'like', "%{$recherche}%")
+                    ->orwhere('emplacement', 'like', "%{$recherche}%")
+                    ->orwhere('duree_ammortissement', 'like', "%{$recherche}%")
+                    ->orwhere('description_famille', 'like', "%{$recherche}%");
 
-        
-        ->paginate(20);
-        $table = view('Bien.table', compact('biens'))->render();
-        return response()->json(compact('table'));
+            })
+            ->where(function ($query)  use ($entreprise_id)   {
+                $query->where('biens.entreprise_id', '=',$entreprise_id);
+            })
+            ->where(function ($query)  use ($categorie_id)   {
+                $query->where('biens.categorie_id', '=',$categorie_id);
+            })
+            ->where(function ($query)  use ($affictation)   {
+                $query->where('affictation', '=',$affictation);
+            })
+            ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+            ->get();
+            $table = view('Bien.table', compact('biens'))->render();
+            return response()->json(compact('table'));
+
+        }else{
+
+            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
+            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
+           ->where('code_barre', 'like', "%{$recherche}%")
+           ->orwhere('description_famille', 'like', "%{$recherche}%")
+           ->orwhere('n_serie', 'like', "%{$recherche}%")
+           ->orwhere('fournisseur', 'like', "%{$recherche}%")
+           ->orwhere('compte_comptable', 'like', "%{$recherche}%")
+           ->orwhere('code_comptable', 'like', "%{$recherche}%")
+           ->orwhere('designation', 'like', "%{$recherche}%")
+           ->orwhere('emplacement', 'like', "%{$recherche}%")
+           ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+           ->get();
+           $table = view('Bien.table', compact('biens'))->render();
+           return response()->json(compact('table'));
+        }
+
+
+       
     }
-    public function recherchevna(Request $request){
+     public function recherchevna(Request $request){
 
          $recherche = trim($request->input('vna'));
 
@@ -249,51 +293,98 @@ class BienController extends Controller
 
     }
     public function rechercheaffictation(Request $request){
-
+        
         $recherche = trim($request->input('affictation'));
         $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
         ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
        ->where('affictation', '=',$recherche)
-       ->paginate(20);
+       ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+      ->get();
        $table = view('Bien.table', compact('biens'))->render();
        return response()->json(compact('table'));
-
    }
  
     public function rechercheparentreprise(Request $request){
-
-        
+        $entreprise_id = trim($request->input('filiale'));
         $entreprise = trim($request->input('entreprise'));
         $categorie = trim($request->input('categorie'));
+          /*
+        /**
+         * 
+         * 
+         * 
+         * @
+        */
         if(!empty($entreprise)  and empty($categorie)){
             $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
             ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
            ->where('entreprise_id', $entreprise)
-            ->paginate(20);
+           ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+            ->get();
             $table = view('Bien.table', compact('biens'))->render();
             return response()->json(compact('table'));
         }
-        if(!empty($categorie) and empty($entreprise)){
-            
+
+        /*
+        /*** 
+         * 
+         * 
+         * 
+         * @
+        */
+    if($entreprise_id != 0){ 
+        $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
+        ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
+        ->where('categorie_id', '=',$categorie)
+        ->where('biens.entreprise_id', '=',$entreprise_id)
+    
+        ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+        ->get();
+        $table = view('Bien.table', compact('biens'))->render();
+        return response()->json(compact('table'));
+    }
+    else{
+        if(!empty($categorie) and empty($entreprise))
+        {
             $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
             ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-            ->where('entreprise_id', '=',$categorie)
-            ->paginate(20);
+            ->where('categorie_id', '=',$categorie)
+            ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+            ->get();
             $table = view('Bien.table', compact('biens'))->render();
             return response()->json(compact('table'));
         }
+
+        }
+        
+          /*
+        /****
+         * 
+         *****
+         * 
+         * 
+         * @@
+        */
+        /*
+
         if(!empty($categorie) and !empty($entreprise)){
             $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
             ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
             ->where('entreprise_id', '=',$entreprise)
             ->where('categorie_id', '=',$categorie)
-
+            ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
             ->paginate(20);
             $table = view('Bien.table', compact('biens'))->render();
             return response()->json(compact('table'));
         }
+        
+        */
+        
+       
+
     }
-    public function fileImport(Request $request) 
+    public function fileImport(Request $request)
+
     {
        
       //  try {
@@ -303,7 +394,14 @@ class BienController extends Controller
           
          // } catch (\Exception $e) {
           
-            return redirect()->route('bien.index')->with("error","Opiration non aboutie");
+           // return redirect()->route('bien.index')->with("error","Opiration non aboutie");
          // }
+    }
+    public function deleteMultiple(Request $request)
+    {   
+        $ids = $request->ids;
+        Bien::whereIn('id',explode(",",$ids))->delete();
+        return response()->json(['status'=>true,'message'=>"Biens deleted successfully."]);
+         
     }
 }
