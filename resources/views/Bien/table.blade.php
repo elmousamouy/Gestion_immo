@@ -66,19 +66,19 @@
             <td class="text-right text-nowrap pr-4font-weight: bold;">{{100/($bien->duree_ammortissement)}}</td> 
             @else <td class="text-right text-nowrap pr-4font-weight: bold;">0</td>
             @endif
-
+            <!--Amortissement--->
             @if($bien->duree_ammortissement>0)
-            <td class="text-right text-nowrap pr-4font-weight: bold;">{{((100/($bien->duree_ammortissement))*($bien->prix_achat))}}</td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;">{{((100/($bien->duree_ammortissement))*($bien->prix_achat)/100)}}</td>
             @else <td class="text-right text-nowrap pr-4font-weight: bold;">0</td>
             @endif
 
          
-
+            <!--Cumul Amortissement--->
             @if($bien->duree_ammortissement>0)
             <td class="text-right text-nowrap pr-4font-weight: bold;">{{((100/($bien->duree_ammortissement)*($bien->prix_achat))*($bien->duree_ammortissement))/100}}</td>
             @else <td class="text-right text-nowrap pr-4font-weight: bold;">0</td> 
             @endif
-            
+            <!--VNA--->
             @if($bien->duree_ammortissement>0)
             <td class="text-right text-nowrap pr-4font-weight: bold;">{{($bien->prix_achat)-((100/($bien->duree_ammortissement)*($bien->prix_achat))*($bien->duree_ammortissement))/100}}</td>
             @else <td class="text-right text-nowrap pr-4font-weight: bold;">0</td> 

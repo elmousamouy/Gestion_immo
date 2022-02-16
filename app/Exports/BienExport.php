@@ -48,7 +48,7 @@ class BienExport implements FromCollection, WithHeadings
         foreach ($biens as &$row) {
             $row->date_ammortssement = date('Y-m-d', strtotime($row->duree_ammortissement . "year", strtotime($row->date_mise_enservice))); 
             ($row->duree_ammortissement > 0) ? $row->taux_ammortissement = 100 / ($row->duree_ammortissement) : $row->taux_ammortissement = "0";
-            ($row->duree_ammortissement > 0) ?  $row->ammortissement = (100 / ($row->duree_ammortissement)) * ($row->prix_achat) : $row->ammortissement = "0";
+            ($row->duree_ammortissement > 0) ?  $row->ammortissement = ((100 / ($row->duree_ammortissement)) * ($row->prix_achat)/100) : $row->ammortissement = "0";
             ($row->duree_ammortissement > 0) ? $row->cumul_ammortissement = ($row->ammortissement) * ($row->duree_ammortissement) / 100 :  $row->cumul_ammortissement = "0";
             ($row->duree_ammortissement > 0) ? $row->vna = ($row->prix_achat) - ($row->cumul_ammortissement) :  $row->vna = "0";
             ($row->vna == 0) ? $row->vna = "0" :  $row->vna = $row->vna;

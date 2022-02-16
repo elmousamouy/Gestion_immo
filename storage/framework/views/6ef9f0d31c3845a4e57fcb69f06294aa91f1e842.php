@@ -66,19 +66,19 @@
             <td class="text-right text-nowrap pr-4font-weight: bold;"><?php echo e(100/($bien->duree_ammortissement)); ?></td> 
             <?php else: ?> <td class="text-right text-nowrap pr-4font-weight: bold;">0</td>
             <?php endif; ?>
-
+            <!--Amortissement--->
             <?php if($bien->duree_ammortissement>0): ?>
-            <td class="text-right text-nowrap pr-4font-weight: bold;"><?php echo e(((100/($bien->duree_ammortissement))*($bien->prix_achat))); ?></td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;"><?php echo e(((100/($bien->duree_ammortissement))*($bien->prix_achat)/100)); ?></td>
             <?php else: ?> <td class="text-right text-nowrap pr-4font-weight: bold;">0</td>
             <?php endif; ?>
 
          
-
+            <!--Cumul Amortissement--->
             <?php if($bien->duree_ammortissement>0): ?>
             <td class="text-right text-nowrap pr-4font-weight: bold;"><?php echo e(((100/($bien->duree_ammortissement)*($bien->prix_achat))*($bien->duree_ammortissement))/100); ?></td>
             <?php else: ?> <td class="text-right text-nowrap pr-4font-weight: bold;">0</td> 
             <?php endif; ?>
-            
+            <!--VNA--->
             <?php if($bien->duree_ammortissement>0): ?>
             <td class="text-right text-nowrap pr-4font-weight: bold;"><?php echo e(($bien->prix_achat)-((100/($bien->duree_ammortissement)*($bien->prix_achat))*($bien->duree_ammortissement))/100); ?></td>
             <?php else: ?> <td class="text-right text-nowrap pr-4font-weight: bold;">0</td> 
