@@ -288,7 +288,12 @@ unset($__errorArgs, $__bag); ?></span>
           </select>
         </div>
       </div>
-        <center><button type="submit" class="btn btn-primary">Enregestrer</button></center>
+      <center>
+        
+       <a href="<?php echo e(route('bien.index')); ?>"  class="btn btn-danger display: inline;"> Annuler</a>
+       <button type="submit"  class="btn btn-primary  display: inline;">Enregestrer</button>
+      </center>
+        
     </form>
   </div>
 </div>
