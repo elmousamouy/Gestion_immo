@@ -35,6 +35,8 @@ class BienExport implements FromCollection, WithHeadings
             unset($i->entreprise_id);
             unset($i->created_at);
             unset($i->updated_at);
+            unset($i->deleted_at);
+
             //dd($i->toArray());
             //$arr = $i->toArray();
             //array_unshift($arr,["nom_entreprises" => $nom_entreprises]);
@@ -82,13 +84,15 @@ class BienExport implements FromCollection, WithHeadings
         unset($column[2]);
         unset($column[24]);
         unset($column[25]);
+        unset($column[26]);
         array_unshift($column,"id","entreprise","categorie");
+        
         
       /*  array_push($column, "entreprise");
         array_push($column, "categorie");*/
         array_push($column, "Date d'ammortissement");
         array_push($column, "taux d'ammortissement");
-        array_push($column, "'ammortissement");
+        array_push($column, "ammortissement");
         array_push($column, "cumul d'ammortissement");
         array_push($column, "VNA");
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EntrepriseController;
 use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,17 +18,21 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
-Route::group(['middleware' => ['auth']], function() {
-  Route::group(['middleware' => ['is_admin']], function() {
-    Route::get('/Users', [UserController::class, 'index'])->name('user.index');
-    Route::get('/Users/create', [UserController::class ,'create'])->name('/Users/create');
-    Route::post('/Users/store', [UserController::class ,'store'])->name('/Users/store');
-    Route::post('/Users/update/{id}', [UserController::class ,'update'])->name('user.update');
-    Route::get('/Users/delete/{id}', [UserController::class ,'destroy'])->name('user.destroy');
-    Route::get('/Users/edit/{id}', [UserController::class ,'edit'])->name('user.edit');
 
-  });
+Auth::routes(['register' => false, 'password.request' => false, 'reset' => false]);
+
+  Route::group(['middleware' => ['auth']], function() {
+
+    Route::group(['middleware' => ['is_admin']], function() {
+
+      Route::get('/Users', [UserController::class, 'index'])->name('user.index');
+      Route::get('/Users/create', [UserController::class ,'create'])->name('/Users/create');
+      Route::post('/Users/store', [UserController::class ,'store'])->name('/Users/store');
+      Route::post('/Users/update/{id}', [UserController::class ,'update'])->name('user.update');
+      Route::get('/Users/delete/{id}', [UserController::class ,'destroy'])->name('user.destroy');
+      Route::get('/Users/edit/{id}', [UserController::class ,'edit'])->name('user.edit');
+
+    });
 
     Route::namespace('Bien')->group(function(){
         Route::get('/', [BienController::class ,'filiales'])->name('show.filiale');
@@ -66,7 +71,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/Categorie/delete/{id}', [CategorieController::class ,'destroy'])->name('categorie.destroy');
     Route::get('/Categorie/edit/{id}', [CategorieController::class ,'edit'])->name('categorie.edit');
 
-   
-});
+ });  
+
 
    

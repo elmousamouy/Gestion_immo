@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Imports;
-
 use App\Models\Bien;
 use Maatwebsite\Excel\Concerns\ToModel;
 use App\Models\Entreprise;
@@ -16,15 +14,63 @@ class BienImport implements ToModel, WithHeadingRow
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function model(array $row)
+
     {
+        
+        //$rowForDeff = $row;
+        if(empty($row["code_barre"])){
+            return null;
+        }
+        $row['date_mise_enservice']= date('Y-m-d', strtotime($row['date_mise_enservice']));
+        $row['date_achat']=date('Y-m-d', strtotime($row['date_achat']));
+        if (Bien::where('code_barre', '=', $row['code_barre'])->exists()) {
+            
+            $biens=Bien::where('code_barre', '=',$row['code_barre'])
+            ->join("entreprises","biens.entreprise_id","=","entreprises.id")
+            ->join("categories","biens.categorie_id","=","categories.id")
+            ->select("biens.*","entreprises.nom_entreprises as entreprise","categories.nom_cat as categorie")
+            ->first()
+            ->toArray();
 
+            //print_r($biens);
+          //  dd($biens,$row);
+            //  $biens["referance"] ="abidi";
+            unset($biens["id"]);
+            unset($biens["entreprise_id"]);
+            unset($biens["categorie_id"]);        
+            unset($biens["created_at"]);
+            unset($biens["updated_at"]);
+            unset($biens["deleted_at"]);
+            unset($row["id"]);
+            unset($row["taux_dammortissement"]);
+            unset($row["date_dammortissement"]);
+            unset($row["ammortissement"]);
+            unset($row["cumul_dammortissement"]);
+            unset($row["vna"]);
+            //dd($biens,$row);
+
+            if(!empty(array_diff_assoc($row,$biens))){
+                $row["entreprise_id"] = Entreprise::where("nom_entreprises", "=", $row['entreprise'])->first()["id"];
+                $row["categorie_id"] = Categorie::where("nom_cat", "=", $row['categorie'])->first()["id"];
+                unset($row["entreprise"]);
+                unset($row["categorie"]);
+
+
+                $update = Bien::where('code_barre', $row['code_barre'])->update(array_diff_assoc($row,$biens));
+                //echo $row['code_barre'];
+                //dd(array_diff_assoc($row,$biens));
+            }
+            if($row["code_barre"] == $biens["code_barre"]){
+                return;
+            }
+         }
+             
         return new Bien([
+            
 
-            'id' => $row['id'],
+            'entreprise_id'     => Entreprise::where("nom_entreprises", "=", $row['entreprise'])->first()["id"],
 
-            'entreprise_id'     => Entreprise::where("nom_entreprises","=",$row['entreprise'])->first()["id"],
-
-            'categorie_id'    => Categorie::where("nom_cat","=",$row['categorie'])->first()["id"],//$row['categorie_id'],
+            'categorie_id'    => Categorie::where("nom_cat", "=", $row['categorie'])->first()["id"],
 
             'referance'     => $row['referance'],
 
@@ -46,7 +92,7 @@ class BienImport implements ToModel, WithHeadingRow
 
             'designation'    => $row['designation'],
 
-            'date_achat'    =>  date('Y-m-d', strtotime($row['date_mise_enservice'])),
+            'date_achat'    =>  date('Y-m-d', strtotime($row['date_achat'])),
 
             'fournisseur'     => $row['fournisseur'],
 
@@ -70,4 +116,6 @@ class BienImport implements ToModel, WithHeadingRow
 
         ]);
     }
+  // return null;
+//}
 }

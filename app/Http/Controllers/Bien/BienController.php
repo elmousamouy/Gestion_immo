@@ -387,15 +387,15 @@ class BienController extends Controller
 
     {
        
-      //  try {
+       // try {
 
            Excel::import(new BienImport, $request->file('biens')->store('temp'));
            return redirect()->route('bien.index')->with("success","Implimantation reussite");
           
          // } catch (\Exception $e) {
           
-           // return redirect()->route('bien.index')->with("error","Opiration non aboutie");
-         // }
+            return redirect()->route('bien.index')->with("error","Opiration non aboutie");
+          //}
     }
     public function deleteMultiple(Request $request)
     {   
