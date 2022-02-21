@@ -4,6 +4,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title trspan="authPortal"></title>
     <meta http-equiv="Content-Script-Type" content="text/javascript">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -43,9 +45,11 @@
 
     <script src="{{ asset('assets/js/jquery.preloader.min.js') }}"></script>
 
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}">
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery-confirm.min.css') }}">
+    <script src="{{ asset('assets/js/jquery-confirm.min.js') }}"></script>
 
-    </script>
+    <script src="{{ asset('assets/js/jquery.preloader.min.js') }}"></script>
 
     <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
 

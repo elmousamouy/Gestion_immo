@@ -25,8 +25,10 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 
         <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-
+        <script src="{{ asset('assets/js/query-confirm.min.js') }}"></script>
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/preloader.css') }}">
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery-confirm.min.css') }}">
 
         <script src="{{ asset('assets/js/jquery.preloader.min.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}">

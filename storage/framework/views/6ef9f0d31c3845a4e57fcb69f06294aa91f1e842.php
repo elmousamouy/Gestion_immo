@@ -37,8 +37,8 @@
       </thead>
       <tbody id="class">
         <?php $__currentLoopData = $biens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bien): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <tr>
-          <td class="text-right text-nowrap pr-4font-weight: bold;"><?php echo e($bien->id); ?></td>
+        <tr id="sid <?php echo e($bien->id); ?> ">
+          <td class="text-right text-nowrap pr-4font-weight: bold;" > <?php echo e($bien->id); ?></td>
             <td class="text-right text-nowrap pr-4font-weight: bold;"><?php echo e($bien->nom_entreprises); ?></td>
             <td class="text-right text-nowrap pr-4font-weight: bold;"><?php echo e($bien->nom_cat); ?></td>
             <td class="text-right text-nowrap pr-4font-weight: bold;"><?php echo e(($bien->duree_ammortissement)); ?></td>
@@ -85,8 +85,8 @@
             <?php endif; ?>
 
             
-            <td class="text-right text-nowrap pr-4font-weight: bold;" class="text-right text-nowrap"><a href="<?php echo e(route('bien.edit',['id'=>$bien->id])); ?>" class="btn btn-primary btn-sm btnAction"><i class="fa fa-edit"></i></a>
-            <a href="<?php echo e(route('bien.destroy',['id'=>$bien->id])); ?>" data-toggle="confirmation" class="btn btn-danger btn-sm btnAction"> <i class="fa fa-trash" aria-hidden="true"></a></td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;" class="text-right text-nowrap"><a href="<?php echo e(route('bien.edit',['id'=>$bien->id])); ?>" class="btn  btn-sm btnAction"><i class="fa fa-edit"></i></a>
+              <button class="deleteRecord" data-id="<?php echo e($bien->id); ?>"  ><i class="fa fa-trash"></button></td>
           </tr>
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           
@@ -101,4 +101,63 @@
 </div>
 <?php endif; ?>
 
+<script>
+
+$(".deleteRecord").click(function(){
+  var id = $(this).data("id");
+  var token = $("meta[name='csrf-token']").attr("content");
+  $.confirm({
+    title: 'Confirmée !',
+    content: 'Êtes-vous sûr de vouloir supprimer ce bien',
+    buttons: {
+        confirm: function () {
+          $.ajax({
+            url: '<?php echo e(url("immo/")); ?>/'+id,
+            type: 'DELETE',
+            data: {
+                "id": id,
+                "_token": token,
+            },
+            success: function (){
+                console.log("it Works");
+            }
+          });
+          $.alert('Confirmée la Suppression!');
+        },
+        cancel: function () {
+            $.alert('Anuller!');
+        },
+
+    }
+});
+});
+
+/*
+
+ $.confirm({
+    title: 'Confirm!',
+    content: 'Simple confirm!',
+    buttons: {
+        confirm: function () {
+            $.alert('Confirmed!');
+        },
+        cancel: function () {
+            $.alert('Canceled!');
+        },
+        somethingElse: {
+            text: 'Something else',
+            btnClass: 'btn-blue',
+            keys: ['enter', 'shift'],
+            action: function(){
+                $.alert('Something else?');
+            }
+        }
+    }
+});
+      
+
+*/
+
+
+</script>
 <?php /**PATH C:\xampp\htdocs\Gestion_immo\resources\views/Bien/table.blade.php ENDPATH**/ ?>

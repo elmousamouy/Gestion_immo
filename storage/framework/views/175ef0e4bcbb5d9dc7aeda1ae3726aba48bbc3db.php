@@ -4,6 +4,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+
     <title trspan="authPortal"></title>
     <meta http-equiv="Content-Script-Type" content="text/javascript">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -43,9 +45,11 @@
 
     <script src="<?php echo e(asset('assets/js/jquery.preloader.min.js')); ?>"></script>
 
-    <script src="<?php echo e(asset('assets/js/bootstrap.min.js')); ?>">
+    <script src="<?php echo e(asset('assets/js/bootstrap.min.js')); ?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('assets/css/jquery-confirm.min.css')); ?>">
+    <script src="<?php echo e(asset('assets/js/jquery-confirm.min.js')); ?>"></script>
 
-    </script>
+    <script src="<?php echo e(asset('assets/js/jquery.preloader.min.js')); ?>"></script>
 
     <link href="<?php echo e(asset('assets/css/font-awesome.min.css')); ?>" rel="stylesheet" />
 

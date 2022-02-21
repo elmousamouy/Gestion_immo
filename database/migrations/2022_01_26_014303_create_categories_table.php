@@ -25,24 +25,42 @@ class CreateCategoriesTable extends Migration
             array(
                 array(
                     'id' => 1,
-                    'nom_cat'=>"immobilisation informatique",
+                    'nom_cat'=>"Immobilisation Informatique",
                     'descriprtion' => "-",
                     
                     
                 ),
                 array(
                     'id' => 2,
-                    'nom_cat'=>"immobilisation labo",
+                    'nom_cat'=>"Immobilisation Labo",
                     'descriprtion' => "-",
                    
                 ),
+
                 array(
                     'id' => 3,
-                    'nom_cat'=>"immobilisation industrielle",
+                    'nom_cat'=>"Immobilisation Industrielle",
                     'descriprtion' => "- ",
                     
                 ),
-
+                array(
+                    'id' => 4,
+                    'nom_cat'=>"Immobilisation Bâtiment",
+                    'descriprtion' => "- ",
+                    
+                ),
+                array(
+                    'id' => 6,
+                    'nom_cat'=>"Immobilisation Incorporelle",
+                    'descriprtion' => "- ",
+                    
+                ),
+                array(
+                    'id' => 5,
+                    'nom_cat'=>"Immobilisation Aménagement ",
+                    'descriprtion' => "- ",
+                    
+                ),
                 
           
             )

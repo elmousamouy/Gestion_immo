@@ -9,6 +9,7 @@ use App\Models\Entreprise;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Imports\BienImport;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\DB;
 
 
@@ -209,12 +210,15 @@ class BienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $biens = Bien::find($id);
-        $biens->destroy($id);
-        return redirect()->route('bien.index')->with("success","Bien bien Supprimer");
+    public function destroy($id){
+   
+        Bien::find($id)
+        ->delete($id);
+        return response()->json([
+            'success' => 'Record deleted successfully!'
+        ]);
     }
+  
     
     public function export()
     {
