@@ -192,6 +192,7 @@
         data:{
         "_token" : "{{ csrf_token() }}",
         "affictation" : affictation,
+         "filiale" : {{$entreprise_id ?? 0}},
         },
         success:function(data){
         $('.table-container').html(data.table);

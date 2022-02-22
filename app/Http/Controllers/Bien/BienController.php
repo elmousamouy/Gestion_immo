@@ -299,13 +299,32 @@ class BienController extends Controller
     public function rechercheaffictation(Request $request){
         
         $recherche = trim($request->input('affictation'));
-        $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-        ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-       ->where('affictation', '=',$recherche)
-       ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-      ->get();
-       $table = view('Bien.table', compact('biens'))->render();
-       return response()->json(compact('table'));
+        $entreprise_id = trim($request->input('filiale'));
+
+        if($entreprise_id != 0) {
+            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
+           ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
+           ->where(function ($query) use ($recherche) {
+               $query->where('affictation', '=',$recherche);
+           })
+           ->where(function ($query)  use ($entreprise_id)   {
+               $query->where('biens.entreprise_id', '=',$entreprise_id);
+           })
+           ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+           ->get();
+           $table = view('Bien.table', compact('biens'))->render();
+           return response()->json(compact('table'));
+   
+       }else{
+   
+           $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
+           ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
+          ->where('affictation', '=',$recherche)
+          ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+         ->get();
+          $table = view('Bien.table', compact('biens'))->render();
+          return response()->json(compact('table'));
+       }
    }
  
     public function rechercheparentreprise(Request $request){
@@ -409,3 +428,36 @@ class BienController extends Controller
          
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

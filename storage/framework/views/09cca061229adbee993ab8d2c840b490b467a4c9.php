@@ -194,6 +194,7 @@
         data:{
         "_token" : "<?php echo e(csrf_token()); ?>",
         "affictation" : affictation,
+         "filiale" : <?php echo e($entreprise_id ?? 0); ?>,
         },
         success:function(data){
         $('.table-container').html(data.table);

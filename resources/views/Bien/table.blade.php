@@ -85,8 +85,8 @@
             @endif
 
             
-            <td class="text-right text-nowrap pr-4font-weight: bold;" class="text-right text-nowrap"><a href="{{route('bien.edit',['id'=>$bien->id])}}" class="btn  btn-sm btnAction"><i class="fa fa-edit"></i></a>
-              <button class="deleteRecord" data-id="{{ $bien->id }}"  ><i class="fa fa-trash"></button></td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;" class="text-right text-nowrap"><a href="{{route('bien.edit',['id'=>$bien->id])}}" class="btn btn-primary  btn-sm btnAction"><i class="fa fa-edit"></i></a>
+              <button class="deleteRecord btn btn-danger " data-id="{{ $bien->id }}"  ><i class="fa fa-trash"></button></td>
           </tr>
           @endforeach
           
