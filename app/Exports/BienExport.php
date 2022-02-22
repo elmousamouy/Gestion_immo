@@ -95,8 +95,7 @@ class BienExport implements FromCollection, WithHeadings
         array_push($column, "ammortissement");
         array_push($column, "cumul d'ammortissement");
         array_push($column, "VNA");
-
-
+        
         return $column;
     }
 }

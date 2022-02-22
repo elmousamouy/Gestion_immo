@@ -9,6 +9,7 @@ use App\Models\Entreprise;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Imports\BienImport;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\DB;
 
 
@@ -209,12 +210,15 @@ class BienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $biens = Bien::find($id);
-        $biens->destroy($id);
-        return redirect()->route('bien.index')->with("success","Bien bien Supprimer");
+    public function destroy($id){
+   
+        Bien::find($id)
+        ->delete($id);
+        return response()->json([
+            'success' => 'Record deleted successfully!'
+        ]);
     }
+  
     
     public function export()
     {
@@ -295,13 +299,32 @@ class BienController extends Controller
     public function rechercheaffictation(Request $request){
         
         $recherche = trim($request->input('affictation'));
-        $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-        ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-       ->where('affictation', '=',$recherche)
-       ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-      ->get();
-       $table = view('Bien.table', compact('biens'))->render();
-       return response()->json(compact('table'));
+        $entreprise_id = trim($request->input('filiale'));
+
+        if($entreprise_id != 0) {
+            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
+           ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
+           ->where(function ($query) use ($recherche) {
+               $query->where('affictation', '=',$recherche);
+           })
+           ->where(function ($query)  use ($entreprise_id)   {
+               $query->where('biens.entreprise_id', '=',$entreprise_id);
+           })
+           ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+           ->get();
+           $table = view('Bien.table', compact('biens'))->render();
+           return response()->json(compact('table'));
+   
+       }else{
+   
+           $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
+           ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
+          ->where('affictation', '=',$recherche)
+          ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
+         ->get();
+          $table = view('Bien.table', compact('biens'))->render();
+          return response()->json(compact('table'));
+       }
    }
  
     public function rechercheparentreprise(Request $request){
@@ -405,3 +428,36 @@ class BienController extends Controller
          
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

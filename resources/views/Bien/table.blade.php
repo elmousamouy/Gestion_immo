@@ -37,8 +37,8 @@
       </thead>
       <tbody id="class">
         @foreach ($biens as $bien)
-        <tr>
-          <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->id}}</td>
+        <tr id="sid {{$bien->id}} ">
+          <td class="text-right text-nowrap pr-4font-weight: bold;" > {{$bien->id}}</td>
             <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->nom_entreprises}}</td>
             <td class="text-right text-nowrap pr-4font-weight: bold;">{{$bien->nom_cat}}</td>
             <td class="text-right text-nowrap pr-4font-weight: bold;">{{($bien->duree_ammortissement)}}</td>
@@ -85,8 +85,8 @@
             @endif
 
             
-            <td class="text-right text-nowrap pr-4font-weight: bold;" class="text-right text-nowrap"><a href="{{route('bien.edit',['id'=>$bien->id])}}" class="btn btn-primary btn-sm btnAction"><i class="fa fa-edit"></i></a>
-            <a href="{{route('bien.destroy',['id'=>$bien->id])}}" data-toggle="confirmation" class="btn btn-danger btn-sm btnAction"> <i class="fa fa-trash" aria-hidden="true"></a></td>
+            <td class="text-right text-nowrap pr-4font-weight: bold;" class="text-right text-nowrap"><a href="{{route('bien.edit',['id'=>$bien->id])}}" class="btn btn-primary  btn-sm btnAction"><i class="fa fa-edit"></i></a>
+              <button class="deleteRecord btn btn-danger " data-id="{{ $bien->id }}"  ><i class="fa fa-trash"></button></td>
           </tr>
           @endforeach
           
@@ -100,3 +100,62 @@
 </div>
 @endif
 
+<script>
+
+$(".deleteRecord").click(function(){
+  var id = $(this).data("id");
+  var token = $("meta[name='csrf-token']").attr("content");
+  $.confirm({
+    title: 'Confirmée !',
+    content: 'Êtes-vous sûr de vouloir supprimer ce bien',
+    buttons: {
+        confirm: function () {
+          $.ajax({
+            url: '{{url("immo/")}}/'+id,
+            type: 'DELETE',
+            data: {
+                "id": id,
+                "_token": token,
+            },
+            success: function (){
+                console.log("it Works");
+            }
+          });
+          $.alert('Confirmée la Suppression!');
+        },
+        cancel: function () {
+            $.alert('Anuller!');
+        },
+
+    }
+});
+});
+
+/*
+
+ $.confirm({
+    title: 'Confirm!',
+    content: 'Simple confirm!',
+    buttons: {
+        confirm: function () {
+            $.alert('Confirmed!');
+        },
+        cancel: function () {
+            $.alert('Canceled!');
+        },
+        somethingElse: {
+            text: 'Something else',
+            btnClass: 'btn-blue',
+            keys: ['enter', 'shift'],
+            action: function(){
+                $.alert('Something else?');
+            }
+        }
+    }
+});
+      
+
+*/
+
+
+</script>
