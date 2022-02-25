@@ -78,7 +78,7 @@
         
           
             <select  style="font-weight: bold !important ;" class="ml-3 d-inline  form-control form-control-sm col-2 " id="affictation" name="affictaion">
-              <option selected>PAR AFFECTAION...</option>
+              <option   selected>PAR AFFECTATION...</option>
               <option  value="1">AFFECTER</option>
               <option value="0" >NON AFFECTER</option>
             </select>        
@@ -126,6 +126,7 @@
       }
 
     })
+    
    
     $( ".searchSelect" ).change(function(){
       entreprise = $("#entreprise").val();
@@ -157,6 +158,7 @@
       }
 
     })
+    
     $("#vna" ).change(function(){
       vna = $("#vna").val();
     
@@ -186,6 +188,7 @@
 
   $("#affictation" ).change(function(){
     affictation = $("#affictation").val();
+
     
         if(affictation!=''){
         $.ajax({
@@ -195,6 +198,9 @@
         "_token" : "<?php echo e(csrf_token()); ?>",
         "affictation" : affictation,
          "filiale" : <?php echo e($entreprise_id ?? 0); ?>,
+         "recherche" : $("#recherche").val(),
+         
+
         },
         success:function(data){
         $('.table-container').html(data.table);

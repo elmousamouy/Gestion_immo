@@ -32,6 +32,15 @@
         </select>
       </div>
       <div class="form-group input-group-sm col-md-4">
+        <label for="name">{{ __('Entreprise') }}</label>
+        <select class="form-control" id="nom_entreprises" name="entreprise_id">
+          <option selected>Choose...</option>
+          @foreach ($entreprises as $entreprise)
+          <option value="{{ $entreprise->id  }}" {{ ($entreprise->id==$users->entreprise_id) ? "selected" : ""}}>{{ $entreprise->nom_entreprises}}</option>
+          @endforeach
+        </select>
+      </div>
+      <div class="form-group input-group-sm col-md-4">
         <label for="name">{{ __('Nom') }}</label>
         <input type="text" class="form-control" name="name" value="{{$users->name}}">
         <span class="text-danger ">@error('name') {{$message}} @enderror</span>
@@ -59,7 +68,7 @@
      
 
     </div>
-    <center><button type="submit" class="btn btn-primary">Enregestrer</button></center>
+    <center><button type="submit" class="btn btn-primary"> Enregistrer</button></center>
       </form>
     </div>
   </div>

@@ -293,8 +293,8 @@ unset($__errorArgs, $__bag); ?></span>
       </div>
       <center>
         
-       <a href="<?php echo e(route('bien.index')); ?>"  class="btn btn-danger display: inline;"> Annuler</a>
-       <button type="submit"  class="btn btn-primary  display: inline;">Enregestrer</button>
+       <a href="<?php echo e(url()->previous()); ?>"  class="btn btn-danger display: inline;"> Annuler</a>
+       <button type="submit"  class="btn btn-primary  display: inline;"> Enregistrer</button>
       </center>
         
     </form>

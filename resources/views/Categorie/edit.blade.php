@@ -11,17 +11,17 @@
       @csrf
     <div class="form-row">
       <div class="form-group input-group-sm col-md-6">
-        <label for="name">{{ __('nom_cat') }}</label>
+        <label for="name">{{ __('Nom Categorie') }}</label>
         <input type="text" class="form-control" name="nom_cat" value="{{$categorie->nom_cat}}">
         <span class="text-danger ">@error('nom_cat') {{$message}} @enderror</span>
       </div>
       <div class="form-group input-group-sm col-md-6">
-        <label for="name">{{ __('Description entreprise') }}</label>
+        <label for="name">{{ __('Description Categorie') }}</label>
         <input type="text" class="form-control"  name="descriprtion" value="{{$categorie->descriprtion}}">
         <span class="text-danger ">@error('') {{$message}} @enderror</span>
       </div>  
     </div>
-    <center><button type="submit" class="btn btn-primary">Enregestrer</button></center>
+    <center><button type="submit" class="btn btn-primary"> Enregistrer</button></center>
       </form>
     </div>
   </div>

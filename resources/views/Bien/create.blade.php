@@ -153,7 +153,11 @@
             </select>
           </div>
         </div>
-          <center><button type="submit" class="btn btn-primary">Enregestrer</button></center>
+        
+          <center>
+            <a href="{{url()->previous()}}"  class="btn btn-danger display: inline;" style="margin-left:8px"> Annuler</a>
+            <button type="submit" class="btn btn-primary"> Enregistrer</button>
+          </center>
       </form>
     </div>
   </div>
