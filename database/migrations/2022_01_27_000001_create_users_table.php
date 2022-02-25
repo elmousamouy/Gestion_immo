@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('role_id')->unsigned();
+            $table->unsignedBigInteger('entreprise_id')->unsigned();
             $table->string('name');
             $table->string('fname');
             $table->string('email')->unique();
@@ -27,6 +28,11 @@ class CreateUsersTable extends Migration
             ->references('id')
             ->on('roles')
             ->onDelete('cascade');
+            
+            $table->foreign('entreprise_id')
+            ->references('id')
+            ->on('entreprises')
+            ->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -35,6 +41,7 @@ class CreateUsersTable extends Migration
             array(
                 array(
                     'id' => '1',
+                    'entreprise_id'=> 1,
                     'role_id'=>1,
                     'name' => "med oussama elmousaouy",
                     'fname' => "med oussama elmousaouy",
@@ -45,6 +52,7 @@ class CreateUsersTable extends Migration
                 array(
                     'id' => 2,
                     'role_id'=>1,
+                    'entreprise_id'=>1,
                     'name' => "mohammed",
                     'fname' => "abidi",
                     "email" => "mohammed.el-abidi@elephant-vert.com",
@@ -53,6 +61,7 @@ class CreateUsersTable extends Migration
                 array(
                     'id' => 3,
                     'role_id'=>1,
+                    'entreprise_id'=>5,
                     'name' => "rouissi ",
                     'fname' => "faical",
                     "email" => "faical.rouissi@elephant-vert.com",
@@ -61,6 +70,7 @@ class CreateUsersTable extends Migration
                 array(
                     'id' => '5',
                     'role_id'=>1,
+                    'entreprise_id'=>1,
                     'name' => " bouslamti ",
                     'fname' => "  amine",
                     "email" => "amine.bouslamti@elephant-vert.com",

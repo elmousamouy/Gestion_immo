@@ -153,8 +153,8 @@
       </div>
       <center>
         
-       <a href="{{route('bien.index')}}"  class="btn btn-danger display: inline;"> Annuler</a>
-       <button type="submit"  class="btn btn-primary  display: inline;">Enregestrer</button>
+       <a href="{{ url()->previous() }}"  class="btn btn-danger display: inline;"> Annuler</a>
+       <button type="submit"  class="btn btn-primary  display: inline;"> Enregistrer</button>
       </center>
         
     </form>

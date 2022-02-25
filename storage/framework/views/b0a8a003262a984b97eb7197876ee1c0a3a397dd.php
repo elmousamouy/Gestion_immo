@@ -15,14 +15,22 @@
     <form action="<?php echo e(route('/Users/store')); ?>" method="POST" class="m-5">
       <?php echo csrf_field(); ?>
     <div class="form-row">
-      <div class="form-group input-group-sm col-md-4">
+      <div class="form-group input-group-sm col-md-6">
         <label for="name"><?php echo e(__('Role')); ?></label>
         <select class="form-control" id="nom_entreprises" name="role_id">
           <option selected>Choose...</option>
           <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
           <option value="<?php echo e($role->id); ?>"><?php echo e($role->role); ?></option>
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-         
+        </select>
+      </div>
+      <div class="form-group input-group-sm col-md-5">
+        <label for="name"><?php echo e(__('Entreprise')); ?></label>
+        <select class="form-control" id="nom_entreprises" name="entreprise_id">
+          <option selected>Choose...</option>
+          <?php $__currentLoopData = $entreprises; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $entreprise): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <option value="<?php echo e($entreprise->id); ?>"><?php echo e($entreprise->nom_entreprises); ?></option>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </select>
       </div>
       <div class="form-group input-group-sm col-md-4">
@@ -61,7 +69,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?></span>
       </div>
-      <div class="form-group input-group-sm col-md-4">
+      <div class="form-group input-group-sm col-md-6">
         <label for="name"><?php echo e(__('Mot de Passe')); ?></label>
         <input type="password" class="form-control"  name="password"  value="">
         <span class="text-danger "><?php $__errorArgs = ['password'];
@@ -73,8 +81,8 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?></span>
       </div> 
-      <div class="form-group input-group-sm col-md-4">
-        <label for="name"><?php echo e(__('Confermer le Mot de Passe')); ?></label>
+      <div class="form-group input-group-sm col-md-6">
+        <label for="name"><?php echo e(__('Confirmer le Mot de Passe')); ?></label>
         <input type="password" class="form-control"  name="password2"  value="">
         <span class="text-danger "><?php $__errorArgs = ['password2'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -87,7 +95,10 @@ unset($__errorArgs, $__bag); ?></span>
       </div>  
 
     </div>
-    <center><button type="submit" class="btn btn-primary">Enregestrer</button></center>
+    <center>
+      <a href="<?php echo e(route('user.index')); ?>"  class="btn btn-danger display: inline;" style="margin-left:8px"> Annuler</a>
+      <button type="submit" class="btn btn-primary"> Enregistrer</button>
+    </center>
       </form>
     </div>
   </div>

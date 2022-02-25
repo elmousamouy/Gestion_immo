@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card" style="background-color: rgb(255, 255, 255)">
-  <div class="card-header">{{ __('List') }}  
+  <div class="card-header">{{ __('CREE Filiale') }}  
            
   </div>
   <div class="card-body">
@@ -21,7 +21,10 @@
         <span class="text-danger ">@error('') {{$message}} @enderror</span>
       </div>  
     </div>
-    <center><button type="submit" class="btn btn-primary">Enregestrer</button></center>
+    <center>
+      <a href="{{route('entreprise.index')}}"  class="btn btn-danger display: inline;" style="margin-left:8px"> Annuler</a>
+      <button type="submit" class="btn btn-primary"> Enregistrer</button>
+    </center>
       </form>
     </div>
   </div>

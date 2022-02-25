@@ -11,7 +11,7 @@
           <th class="text-right text-nowrap" style="  font-weight: bold;">Description de famille</th>
           <th class="text-right text-nowrap" style="  font-weight: bold;">Prix</th>
           <th class="text-right text-nowrap" style="  font-weight: bold;"> Date d'ammortissement</th>
-          <th class="text-right text-nowrap" style="  font-weight: bold;">File</th>
+          <th class="text-right text-nowrap" style="  font-weight: bold;">Factur</th>
           <th class="text-right text-nowrap" style="  font-weight: bold;">Referance</th>
           <th class="text-right text-nowrap" style="  font-weight: bold;">Site</th>
           <th class="text-right text-nowrap" style="  font-weight: bold;">Sous-site</th>
@@ -86,7 +86,7 @@
 
             
             <td class="text-right text-nowrap pr-4font-weight: bold;" class="text-right text-nowrap"><a href="<?php echo e(route('bien.edit',['id'=>$bien->id])); ?>" class="btn btn-primary  btn-sm btnAction"><i class="fa fa-edit"></i></a>
-              <button class="deleteRecord btn btn-danger" data-id="<?php echo e($bien->id); ?>"  ><i class="fa fa-trash"></button></td>
+              <button class="deleteRecord btn btn-danger btn-sm " data-id="<?php echo e($bien->id); ?>"  ><i class="fa fa-trash"></button></td>
           </tr>
           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           

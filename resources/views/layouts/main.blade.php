@@ -79,9 +79,9 @@
 
             <img src="{{ asset('img/LOGO-EV_FR.png') }}" style="float:left;width: 90px;margin-left:20px;">
 
-<a class="dropbtn ml-5 mr-2" href="{{ url('/') }}" style="border-radius: 3px;font-weight: bold;">Accueil</a>
+<a class="dropbtn ml-5 mr-2" href="{{ url('/') }}" style="border-radius: 3px;font-weight: bold;">Filiale</a>
 
-            <a class="dropbtn" href="{{ url('/Biens') }}" style="border-radius: 3px; font-weight: bold !important">Biens</a>
+           <!-- <a class="dropbtn" href="{{ url('/Biens') }}" style="border-radius: 3px; font-weight: bold !important">Biens</a>-->
 
             @if (Auth::user()->role_id == 1)
 

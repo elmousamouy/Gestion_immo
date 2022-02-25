@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Entreprise;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -19,7 +21,8 @@ class UserController extends Controller
     public function create()
     {
         $roles= Role::get();
-        return view('user.create', compact('roles')); 
+        $entreprises= Entreprise::get();
+        return view('user.create', compact('roles'),compact('entreprises')); 
     }
 
     public function store(Request $request)
@@ -27,12 +30,14 @@ class UserController extends Controller
         User::create([
 
             "role_id" => $request->role_id,
+            "entreprise_id" => $request->entreprise_id,
             "name" => $request->name,
             "fname" => $request->fname,
             "email" => $request->email,
             "password" =>  Hash::make($request->password),
               
         ]);
+       
         return redirect()->route('user.index')->with("success","utilisateur bien ajouter");
        
     }   
@@ -40,7 +45,8 @@ class UserController extends Controller
     {
         $users = User::find($id);
         $roles  = Role::get();
-        return view('user.edit', compact('users','roles'));
+        $entreprises  = Entreprise::get();
+        return view('user.edit', compact('users','roles','entreprises'));
     }
 
     public function update(Request $request, $id)
@@ -51,6 +57,7 @@ class UserController extends Controller
         }
         $users = User::find($id);
         $users->role_id = $request->role_id;
+        $users->entreprise_id = $request->entreprise_id;
         $users->name = $request->name;
         $users->fname = $request->fname;
         $users->email = $request->email;

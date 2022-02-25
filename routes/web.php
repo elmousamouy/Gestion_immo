@@ -34,9 +34,14 @@ Auth::routes(['register' => false, 'password.request' => false, 'reset' => false
 
     });
 
+    
+    
+
     Route::namespace('Bien')->group(function(){
-        Route::get('/', [BienController::class ,'filiales'])->name('show.filiale');
+      Route::group(['middleware' => ['verifie']], function() {
         Route::get('/Bien/filiale/{entreprise_id}', [BienController::class ,'showfiliale'])->name('bien.filiale');
+      });
+        Route::get('/', [BienController::class ,'filiales'])->name('show.filiale');
         Route::post('/Bien/search/', [BienController::class, 'recherche']);
         Route::post('/Bien/search/vna', [BienController::class, 'recherchevna']);
         Route::post('/Bien/search/affictation', [BienController::class, 'rechercheaffictation']);
@@ -52,6 +57,7 @@ Auth::routes(['register' => false, 'password.request' => false, 'reset' => false
         
         Route::get('/Biens/export', [BienController::class, 'export']);
         Route::post('/Biens/import', [BienController::class, 'fileImport']);
+      
 
     });
   ///////////
