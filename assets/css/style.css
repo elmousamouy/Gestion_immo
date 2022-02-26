@@ -1,9 +1,8 @@
 html,
 body {
-    background-image: url("../../img/bck.png");
+    background-image: url("../../img/bkd.png");
     background-size: cover;
     margin: 0;
-
 }
 
 div.form {
