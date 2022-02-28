@@ -43,10 +43,10 @@ Auth::routes(['register' => false, 'password.request' => false, 'reset' => false
       });
         Route::get('/', [BienController::class ,'filiales'])->name('show.filiale');
         Route::post('/Bien/search/', [BienController::class, 'recherche']);
-        Route::post('/Bien/search/vna', [BienController::class, 'recherchevna']);
-        Route::post('/Bien/search/affictation', [BienController::class, 'rechercheaffictation']);
-        Route::post('/Bien/search/categorie/', [BienController::class, 'rechercheparcategorie']);
-        Route::post('/Bien/search/entreprise', [BienController::class, 'rechercheparentreprise']);
+       // Route::post('/Bien/search/vna', [BienController::class, 'recherchevna']);
+        //Route::post('/Bien/search/affictation', [BienController::class, 'rechercheaffictation']);
+        //Route::post('/Bien/search/categorie/', [BienController::class, 'rechercheparcategorie']);
+        //Route::post('/Bien/search/entreprise', [BienController::class, 'rechercheparentreprise']);
         Route::get('Bien/create', [BienController::class ,'create'])->name('bien.create');
         Route::post('/Bien/store', [BienController::class ,'store'])->name('bien.store');
         Route::get('/Biens', [BienController::class ,'index'])->name('bien.index');

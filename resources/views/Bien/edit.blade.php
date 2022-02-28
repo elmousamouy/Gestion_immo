@@ -17,6 +17,7 @@
     <div class="table-container">
     <form action="{{route('bien.update',['id'=>$biens->id])}}" method="POST" enctype="multipart/form-data">
       @csrf
+      @method('patch')
       <div class="form-row">
         <div class="form-group input-group-sm col-md-2">
           <label for="name">{{ __('Categorie') }}</label>
