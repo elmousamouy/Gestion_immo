@@ -238,20 +238,13 @@ class BienController extends Controller
         $sqlVna = " and (prix_achat -(((100/duree_ammortissement)*(prix_achat*duree_ammortissement))/100)) = {$vna})";
         $sqlParBuffer = ' and (emplacement like "%'.$buffer.'%" OR referance like "%'.$buffer.'%" OR site like "%'.$buffer.'%" OR sous_famille like "%'.$buffer.'%" OR fournisseur like "%'.$buffer.'%" OR designation like "%'.$buffer.'%" OR n_serie like "%'.$buffer.'%" OR n_factur like "%'.$buffer.'%" OR n_bc like "%'.$buffer.'%")';
         $sql = $sqlheader;
-
         (!empty($buffer)) ? $sql.= $sqlParBuffer: $sql = $sql;
         (!empty($affictation) || $affictation == 0) ? $sql.= $sqlParAfectation: $sql = $sql;
         (!empty($categorie_id)) ? $sql.= $sqlParCategory: $sql = $sql;
-        //(!empty($vna)) ? $sql.= $sqlVna: $sql = $sql;
-        //(!empty($vna)) ? $sql.= $sqlVna: $sql = $sql;
         $biens = DB::select(DB::raw($sql));
-       // dd($biens);
         $table = view('Bien.table', compact('biens'))->render();
         return response()->json(compact('table'));
         
-
-
-       
     }
      
     public function fileImport(Request $request)
