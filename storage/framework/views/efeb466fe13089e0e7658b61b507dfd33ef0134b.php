@@ -38,7 +38,7 @@
 </div>
 <?php endif; ?>
 <div class="card" style="background-color: rgb(255, 255, 255)">
-  <div class="card-header"><?php echo e(__('La liste des Biens')); ?>
+  <div class="card-header"><?php echo e(__('Biens')); ?>
 
           <a class="btn btn-success btn-sm float-right" style="font-weight: bold !important ;" href="<?php echo e(url('/Bien/create')); ?>">Ajouter un Bien</a>
           <a class="btn btn-primary btn-sm float-right px-2 mr-2" style="padding: 8px 0px; " href="<?php echo e(url('/Biens/export')); ?>" ><i class="fa fa-download" aria-hidden="true"></i></a>
@@ -52,12 +52,12 @@
           </form>
           
 
-          <input type="text" name="user_name" id="recherche" class="ml-3 d-inline  form-control form-control-sm col-1"  style="font-weight: bold !important ;" >
+          <input type="text" name="user_name" id="buffer" class="ml-3 d-inline  form-control form-control-sm col-1"  style="font-weight: bold !important ;" >
           
            
 
-          <select  style="font-weight: bold !important ;" id="categorie"  class="ml-3 d-inline  form-control form-control-sm col-2 searchSelect" >
-            <option  value="" selected>PAR CATEGORIE...</option>
+          <select  style="font-weight: bold !important ;" id="categorie"  class="ml-3 d-inline  form-control form-control-sm col-1 searchSelect" >
+            <option  value="" selected> CATEGORIE...</option>
             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categorie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <option value="<?php echo e($categorie->id); ?>"><?php echo e($categorie->nom_cat); ?></option>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -76,11 +76,20 @@
           </select>-->
         
           
-            <select  style="font-weight: bold !important ;" class="ml-3 d-inline  form-control form-control-sm col-2 " id="affictation" name="affictaion">
-              <option selected>PAR AFFECTAION...</option>
+            <select  style="font-weight: bold !important ;" class="ml-3 d-inline  form-control form-control-sm col-2 searchSelect " id="affictation" name="affictaion">
+              <option  value=""  selected>   PAR AFFECTATION ...</option>
               <option  value="1">AFFECTER</option>
               <option value="0" >NON AFFECTER</option>
-            </select>        
+            </select>
+            <!--
+            <select  style="font-weight: bold !important ;" class="ml-3 d-inline  form-control form-control-sm col-1 searchSelect " id="vna" name="vna">
+              <option  value=""  selected></option>
+              <option  value="1">Completemment ammortir</option>
+              <option value="0" >Quelle chose</option>
+            </select>
+            <input type="date" name="user_name" id="buffer" class="ml-3 d-inline  form-control form-control-sm col-2"  style="font-weight: bold !important ;" >
+            <input type="date" name="user_name" id="buffer" class="ml-3 d-inline  form-control form-control-sm col-2"  style="font-weight: bold !important ;" >
+          -->
     </div>
   <div class="card-body">
     <div class="table-container">
@@ -100,19 +109,22 @@
     });
     
  
-    $(document).on('keyup','#recherche',function(){
-      if(recherche!=''){
+    $("#buffer").on('keyup',function(){
+      buffer = $("#buffer").val()
+      if(buffer!=''){
 
         $.ajax({
-
           url:'<?php echo e(url("/Bien/search")); ?>',
           method : 'post',
           data:{
             "_token" : "<?php echo e(csrf_token()); ?>",
-            "recherche" : $(this).val(),
+            "buffer" : buffer,
             "filiale" : <?php echo e($entreprise_id ?? 0); ?>,
             "categorie_id" : $("#categorie").val(),
-            "affictation" : $("#affictation").val()
+            "affictation" : $("#affictation").val(),
+            "vna" : $("#vna").val()
+            
+            
 
           },
           success:function(data){
@@ -125,52 +137,27 @@
       }
 
     })
+    
    
     $( ".searchSelect" ).change(function(){
       entreprise = $("#entreprise").val();
       categorie = $("#categorie").val();
-      
-    
-      
+      affictation = $("#affictation").val();
+      vna =  $("#vna").val();
+      buffer = $("#buffer").val()
 
-      if(entreprise!='' || categorie!=''){
-
+      if(entreprise!='' || categorie!='' || affictation!='' ){
         $.ajax({
-
-          url:'<?php echo e(url("/Bien/search/entreprise/")); ?>',
+          url:'<?php echo e(url("/Bien/search")); ?>',
           method : 'post',
           data:{
             "_token" : "<?php echo e(csrf_token()); ?>",
-      
             "categorie" : categorie,
-            "filiale" : <?php echo e($entreprise_id ?? 0); ?>
-
-          },
-          success:function(data){
-            $('.table-container').html(data.table);
-            console.log(data);
-          }
-
-        });
-
-      }
-
-    })
-    $("#vna" ).change(function(){
-      vna = $("#vna").val();
-    
-      
-
-      if(vna!=''){
-
-        $.ajax({
-
-          url:'<?php echo e(url("/Bien/search/vna")); ?>',
-          method : 'post',
-          data:{
-            "_token" : "<?php echo e(csrf_token()); ?>",
+            "affictation" : affictation,
             "vna" : vna,
-            
+             "filiale" : <?php echo e($entreprise_id ?? 0); ?>,
+             "buffer" : buffer,
+
           },
           success:function(data){
             $('.table-container').html(data.table);
@@ -182,29 +169,7 @@
       }
 
     })
-
-  $("#affictation" ).change(function(){
-    affictation = $("#affictation").val();
     
-        if(affictation!=''){
-        $.ajax({
-        url:'<?php echo e(url("/Bien/search/affictation")); ?>',
-        method : 'post',
-        data:{
-        "_token" : "<?php echo e(csrf_token()); ?>",
-        "affictation" : affictation,
-         "filiale" : <?php echo e($entreprise_id ?? 0); ?>,
-        },
-        success:function(data){
-        $('.table-container').html(data.table);
-        console.log(data);
-        }
-         });
-        }
-    })
-
-
-
   });
 
 
