@@ -227,287 +227,39 @@ class BienController extends Controller
 
     public function recherche(Request $request){
 
-        $recherche = trim($request->input('recherche'));
+        $buffer = trim($request->input('buffer'));
         $entreprise_id = trim($request->input('filiale'));
-        $categorie_id = trim($request->input('categorie_id'));
+        $categorie_id = trim($request->input('categorie'));
         $affictation = trim($request->input('affictation'));
-
-        if($entreprise_id != 0 && !empty($categorie_id)) {
-             $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-            ->where(function ($query) use ($recherche) {
-                $query->where('code_barre', 'like', "%{$recherche}%")
-                    ->orwhere('description_famille', 'like', "%{$recherche}%")
-                    ->orwhere('n_serie', 'like', "%{$recherche}%")
-                    ->orwhere('fournisseur', 'like', "%{$recherche}%")
-                    ->orwhere('compte_comptable', 'like', "%{$recherche}%")
-                    ->orwhere('code_comptable', 'like', "%{$recherche}%")
-                    ->orwhere('designation', 'like', "%{$recherche}%")
-                    ->orwhere('emplacement', 'like', "%{$recherche}%")
-                    ->orwhere('duree_ammortissement', 'like', "%{$recherche}%")
-                    ->orwhere('description_famille', 'like', "%{$recherche}%");
-
-            })
-            ->where(function ($query)  use ($entreprise_id)   {
-                $query->where('biens.entreprise_id', '=',$entreprise_id);
-            })
-            ->where(function ($query)  use ($categorie_id)   {
-                $query->where('biens.categorie_id', '=',$categorie_id);
-            })
-            
-            ->where(function ($query)  use ($affictation)   {
-                $query->where('affictation', '=',$affictation);
-            })
-            ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-            ->get();
-            $table = view('Bien.table', compact('biens'))->render();
-            return response()->json(compact('table'));
-
-
-        }
-
-        elseif($entreprise_id  != 0 && empty($categorie_id) ){
-
-            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-            ->where(function ($query) use ($recherche) {
-                $query->where('code_barre', 'like', "%{$recherche}%")
-                    ->orwhere('description_famille', 'like', "%{$recherche}%")
-                    ->orwhere('n_serie', 'like', "%{$recherche}%")
-                    ->orwhere('fournisseur', 'like', "%{$recherche}%")
-                    ->orwhere('compte_comptable', 'like', "%{$recherche}%")
-                    ->orwhere('code_comptable', 'like', "%{$recherche}%")
-                    ->orwhere('designation', 'like', "%{$recherche}%")
-                    ->orwhere('emplacement', 'like', "%{$recherche}%")
-                    ->orwhere('duree_ammortissement', 'like', "%{$recherche}%")
-                    ->orwhere('description_famille', 'like', "%{$recherche}%");
-
-            })
-            ->where(function ($query)  use ($entreprise_id)   {
-                $query->where('biens.entreprise_id', '=',$entreprise_id);
-            })
-
-           
-            ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-            ->get();
-            $table = view('Bien.table', compact('biens'))->render();
-            return response()->json(compact('table'));
-
-        }
-
-        elseif($entreprise_id  != 0 && empty($categorie_id)  && !empty($affictation)){
-
-            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-            ->where(function ($query) use ($recherche) {
-                $query->where('code_barre', 'like', "%{$recherche}%")
-                    ->orwhere('description_famille', 'like', "%{$recherche}%")
-                    ->orwhere('n_serie', 'like', "%{$recherche}%")
-                    ->orwhere('fournisseur', 'like', "%{$recherche}%")
-                    ->orwhere('compte_comptable', 'like', "%{$recherche}%")
-                    ->orwhere('code_comptable', 'like', "%{$recherche}%")
-                    ->orwhere('designation', 'like', "%{$recherche}%")
-                    ->orwhere('emplacement', 'like', "%{$recherche}%")
-                    ->orwhere('duree_ammortissement', 'like', "%{$recherche}%")
-                    ->orwhere('description_famille', 'like', "%{$recherche}%");
-
-            })
-            ->where(function ($query)  use ($entreprise_id)   {
-                $query->where('biens.entreprise_id', '=',$entreprise_id);
-            })
-            ->where(function ($query)  use ($affictation)   {
-                $query->where('affictation', '=',$affictation);
-            });
-        }
-        
-        else{
-
-            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-           ->where('code_barre', 'like', "%{$recherche}%")
-           ->orwhere('description_famille', 'like', "%{$recherche}%")
-           ->orwhere('n_serie', 'like', "%{$recherche}%")
-           ->orwhere('fournisseur', 'like', "%{$recherche}%")
-           ->orwhere('compte_comptable', 'like', "%{$recherche}%")
-           ->orwhere('code_comptable', 'like', "%{$recherche}%")
-           ->orwhere('designation', 'like', "%{$recherche}%")
-           ->orwhere('emplacement', 'like', "%{$recherche}%")
-           ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-           ->get();
-           $table = view('Bien.table', compact('biens'))->render();
-           return response()->json(compact('table'));
-        }
-
-
-       
-    }
-     public function recherchevna(Request $request){
-
-         $recherche = trim($request->input('vna'));
-
-         $biens = Bien::select("*")
-            ->Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-            ->where("(('prix_achat')-((100/('duree_ammortissement')*('prix_achat'))*('duree_ammortissement'))/100)", '=',$recherche)
-            ->paginate(20);
-            $table = view('Bien.table', compact('biens'))->render();
-            return response()->json(compact('table'));
-
-    }
-    
-    public function rechercheaffictation(Request $request){
-        
-        $affictation = trim($request->input('affictation'));
-        $entreprise_id = trim($request->input('filiale'));
-        echo $affictation;
-        $recherche = trim($request->input('recherche'));
-
-        if($entreprise_id != 0) {
-            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-           ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-           ->where(function ($query) use ($affictation) {
-               $query->where('affictation', '=',$affictation);
-           })
-           ->where(function ($query)  use ($entreprise_id)  {
-               $query->where('biens.entreprise_id', '=',$entreprise_id);
-           })
-           ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-           ->get();
-           $table = view('Bien.table', compact('biens'))->render();
-           return response()->json(compact('table'));
-       }
-       elseif($entreprise_id  != 0 && empty($categorie_id)){
-
-        $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-        ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-        ->where(function ($query) use ($recherche) {
-            $query->where('code_barre', 'like', "%{$recherche}%")
-                ->orwhere('description_famille', 'like', "%{$recherche}%")
-                ->orwhere('n_serie', 'like', "%{$recherche}%")
-                ->orwhere('fournisseur', 'like', "%{$recherche}%")
-                ->orwhere('compte_comptable', 'like', "%{$recherche}%")
-                ->orwhere('code_comptable', 'like', "%{$recherche}%")
-                ->orwhere('designation', 'like', "%{$recherche}%")
-                ->orwhere('emplacement', 'like', "%{$recherche}%")
-                ->orwhere('duree_ammortissement', 'like', "%{$recherche}%")
-                ->orwhere('description_famille', 'like', "%{$recherche}%");
-
-        })
-        ->where(function ($query)  use ($entreprise_id)   {
-            $query->where('biens.entreprise_id', '=',$entreprise_id);
-        })
-        
-        ->where(function ($query)  use ($affictation)   {
-            $query->where('affictation', '=',$affictation);
-        });
-    }
-       
-       else{
-   
-           $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-           ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-          ->where('affictation', '=',$recherche)
-          ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-         ->get();
-          $table = view('Bien.table', compact('biens'))->render();
-          return response()->json(compact('table'));
-       }
-
-   }
- 
-    public function rechercheparentreprise(Request $request){
-        $entreprise_id = trim($request->input('filiale'));
-        $entreprise = trim($request->input('entreprise'));
-        $categorie = trim($request->input('categorie'));
-          /*
-        /**
-         * 
-         * 
-         * 
-         * @
-        */
-        if(!empty($entreprise)  and empty($categorie)){
-            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-           ->where('entreprise_id', $entreprise)
-           ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-            ->get();
-            $table = view('Bien.table', compact('biens'))->render();
-            return response()->json(compact('table'));
-        }
-
-        /*
-        /*** 
-         * 
-         * 
-         * 
-         * @
-        */
-    if($entreprise_id != 0){ 
-        $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-        ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-        ->where('categorie_id', '=',$categorie)
-        ->where('biens.entreprise_id', '=',$entreprise_id)
-    
-        ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-        ->get();
+        $vna= trim($request->input('vna'));
+        $sqlheader = "SELECT b.*, nom_entreprises,nom_cat FROM biens b    INNER JOIN entreprises e ON b.entreprise_id = e.id INNER JOIN categories c ON b.categorie_id = c.id WHERE entreprise_id = {$entreprise_id}";
+        $sqlParCategory = " and (categorie_id = {$categorie_id})";
+        $sqlParAfectation = " and (affictation = {$affictation})";
+        $sqlVna = " and (prix_achat -(((100/duree_ammortissement)*(prix_achat*duree_ammortissement))/100)) = {$vna})";
+        $sqlParBuffer = ' and (emplacement like "%'.$buffer.'%" OR referance like "%'.$buffer.'%" OR site like "%'.$buffer.'%" OR sous_famille like "%'.$buffer.'%" OR fournisseur like "%'.$buffer.'%" OR designation like "%'.$buffer.'%" OR n_serie like "%'.$buffer.'%" OR n_factur like "%'.$buffer.'%" OR n_bc like "%'.$buffer.'%")';
+        $sql = $sqlheader;
+        (!empty($buffer)) ? $sql.= $sqlParBuffer: $sql = $sql;
+        (!empty($affictation) || $affictation == 0) ? $sql.= $sqlParAfectation: $sql = $sql;
+        (!empty($categorie_id)) ? $sql.= $sqlParCategory: $sql = $sql;
+        $biens = DB::select(DB::raw($sql));
         $table = view('Bien.table', compact('biens'))->render();
         return response()->json(compact('table'));
+        
     }
-    else{
-        if(!empty($categorie) and empty($entreprise))
-        {
-            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-            ->where('categorie_id', '=',$categorie)
-            ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-            ->get();
-            $table = view('Bien.table', compact('biens'))->render();
-            return response()->json(compact('table'));
-        }
-
-        }
-        
-          /*
-        /****
-         * 
-         *****
-         * 
-         * 
-         * @@
-        */
-        /*
-
-        if(!empty($categorie) and !empty($entreprise)){
-            $biens = Bien::Join('entreprises', 'entreprises.id', '=', 'biens.entreprise_id')
-            ->Join('categories', 'categories.id', '=', 'biens.categorie_id')
-            ->where('entreprise_id', '=',$entreprise)
-            ->where('categorie_id', '=',$categorie)
-            ->select('biens.*','categories.nom_cat','entreprises.nom_entreprises')
-            ->paginate(20);
-            $table = view('Bien.table', compact('biens'))->render();
-            return response()->json(compact('table'));
-        }
-        
-        */
-        
-       
-
-    }
+     
     public function fileImport(Request $request)
-
-    {
-       
-       // try {
+    { 
+        try {
 
            Excel::import(new BienImport, $request->file('biens')->store('temp'));
            return redirect()->route('bien.index')->with("success","Implimantation reussite");
           
-         // } catch (\Exception $e) {
+          } catch (\Exception $e) {
           
             return redirect()->route('bien.index')->with("error","Opiration non aboutie");
-          //}
+          }
     }
+
     public function deleteMultiple(Request $request)
     {   
         $ids = $request->ids;
