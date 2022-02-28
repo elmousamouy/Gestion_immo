@@ -76,8 +76,8 @@
           </select>-->
         
           
-            <select  style="font-weight: bold !important ;" class="ml-3 d-inline  form-control form-control-sm col-1 searchSelect " id="affictation" name="affictaion">
-              <option  value=""  selected> AFFECTER...</option>
+            <select  style="font-weight: bold !important ;" class="ml-3 d-inline  form-control form-control-sm col-2 searchSelect " id="affictation" name="affictaion">
+              <option  value=""  selected>   PAR AFFECTATION ...</option>
               <option  value="1">AFFECTER</option>
               <option value="0" >NON AFFECTER</option>
             </select>
