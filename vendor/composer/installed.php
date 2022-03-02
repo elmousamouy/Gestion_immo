@@ -409,20 +409,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-<<<<<<< HEAD
             'reference' => '3e4e48e3c78e00a2326f766daf0cd91ff5bf9947',
-=======
-            'reference' => '6c87e5be056623c2becd359767abb2b8e8dfa2ca',
-            'dev_requirement' => false,
-        ),
-        'laravel/legacy-factories' => array(
-            'pretty_version' => 'v1.3.0',
-            'version' => '1.3.0.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../laravel/legacy-factories',
-            'aliases' => array(),
-            'reference' => '5edc7e7eb76e7b4b29221f32139bcbf806c8870f',
->>>>>>> 444c8519ecd99cfdc2b619253ea90cfee9c2ee1a
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

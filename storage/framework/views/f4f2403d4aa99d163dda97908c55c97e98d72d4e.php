@@ -14,6 +14,7 @@
     <div class="table-container">
     <form action="<?php echo e(route('bien.update',['id'=>$biens->id])); ?>" method="POST" enctype="multipart/form-data">
       <?php echo csrf_field(); ?>
+      <?php echo method_field('patch'); ?>
       <div class="form-row">
         <div class="form-group input-group-sm col-md-2">
           <label for="name"><?php echo e(__('Categorie')); ?></label>
@@ -290,8 +291,8 @@ unset($__errorArgs, $__bag); ?></span>
       </div>
       <center>
         
-       <a href="<?php echo e(route('bien.index')); ?>"  class="btn btn-danger display: inline;"> Annuler</a>
-       <button type="submit"  class="btn btn-primary  display: inline;">Enregestrer</button>
+       <a href="<?php echo e(url()->previous()); ?>"  class="btn btn-danger display: inline;"> Annuler</a>
+       <button type="submit"  class="btn btn-primary  display: inline;"> Enregistrer</button>
       </center>
         
     </form>

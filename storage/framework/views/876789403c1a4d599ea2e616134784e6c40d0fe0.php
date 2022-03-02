@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
 <div class="card" style="background-color: rgb(255, 255, 255)">
-  <div class="card-header"><?php echo e(__('Modifier Entreprise')); ?>  
+  <div class="card-header"><?php echo e(__('Modifier Filiale')); ?>  
            
   </div>
   <div class="card-body">
@@ -33,7 +33,10 @@ endif;
 unset($__errorArgs, $__bag); ?></span>
       </div>  
     </div>
-    <center><button type="submit" class="btn btn-primary">Enregestrer</button></center>
+    <center>
+      <a href="<?php echo e(route('entreprise.index')); ?>"  class="btn btn-danger display: inline;" style="margin-left:8px"> Annuler</a>
+      <button type="submit" class="btn btn-primary"> Enregistrer</button>
+    </center>
       </form>
     </div>
   </div>

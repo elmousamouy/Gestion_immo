@@ -1,0 +1,1 @@
+<?php /**PATH /var/www/html/Gestion_immo/resources/views/layouts/footer.blade.php ENDPATH**/ ?>

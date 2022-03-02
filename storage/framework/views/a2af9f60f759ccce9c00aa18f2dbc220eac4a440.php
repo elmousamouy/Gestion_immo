@@ -28,6 +28,15 @@
         </select>
       </div>
       <div class="form-group input-group-sm col-md-4">
+        <label for="name"><?php echo e(__('Entreprise')); ?></label>
+        <select class="form-control" id="nom_entreprises" name="entreprise_id">
+          <option selected>Choose...</option>
+          <?php $__currentLoopData = $entreprises; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $entreprise): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <option value="<?php echo e($entreprise->id); ?>" <?php echo e(($entreprise->id==$users->entreprise_id) ? "selected" : ""); ?>><?php echo e($entreprise->nom_entreprises); ?></option>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </select>
+      </div>
+      <div class="form-group input-group-sm col-md-4">
         <label for="name"><?php echo e(__('Nom')); ?></label>
         <input type="text" class="form-control" name="name" value="<?php echo e($users->name); ?>">
         <span class="text-danger "><?php $__errorArgs = ['name'];
@@ -90,7 +99,7 @@ unset($__errorArgs, $__bag); ?></span>
      
 
     </div>
-    <center><button type="submit" class="btn btn-primary">Enregestrer</button></center>
+    <center><button type="submit" class="btn btn-primary"> Enregistrer</button></center>
       </form>
     </div>
   </div>
