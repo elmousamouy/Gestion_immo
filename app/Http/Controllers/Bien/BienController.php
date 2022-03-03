@@ -10,7 +10,9 @@ use App\Models\Categorie;
 use Illuminate\Http\Request;
 use App\Imports\BienImport;
 use GrahamCampbell\ResultType\Success;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 
 class BienController extends Controller
@@ -179,7 +181,9 @@ class BienController extends Controller
             $file->move('storage/image/', $new_file);
             $biens->factur = '/storage/image/' . $new_file;
         }
-
+        
+        $biens->entreprise_id=$request->entreprise_id;
+        $biens->categorie_id=$request->categorie_id;
         $biens->referance = $request->referance;
         $biens->affictation = $request->affictation;
         $biens->referance = $request->referance;
@@ -202,7 +206,10 @@ class BienController extends Controller
         $biens->prix_achat = $request->prix_achat;
         $biens->date_mise_enservice = $request->date_mise_enservice;
         $biens->update();
-        return redirect()->route('bien.index')->with("success","Bien bien Modifier");
+        $filiale = Auth::user()->entreprise_id;
+        //dd($filiale);
+        return \Redirect::route('bien.filiale',  [$filiale])->with("success","Bien bien Modifier");
+       // return redirect()->route('bien.index')->with("success","Bien bien Modifier");
     }
     /**
      * Remove the specified resource from storage.
